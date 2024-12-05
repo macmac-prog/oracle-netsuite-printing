@@ -29,6 +29,7 @@ export default function Home() {
 
   return (
     <>
+    <form onSubmit={handleLogin}>
     <div className="mt-20 flex gap-2 items-center justify-center mb-10">
       <Image src={netsuite} alt="NetSuite" width={200}/>
       <Image src={smct} alt="SMCT Group of Companies" width={200}/>
@@ -61,8 +62,9 @@ export default function Home() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button onClick={handleLogin} className="bg-[#607799] text-white border px-3 py-1 rounded-md">Login</button>
+      <button type="submit" className="bg-[#607799] text-white border px-3 py-1 rounded-md">Login</button>
     </div>
+    </form>
       </>
   );
 }
