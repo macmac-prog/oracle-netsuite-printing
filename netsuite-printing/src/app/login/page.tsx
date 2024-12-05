@@ -1,39 +1,54 @@
 "use client";
 import { useAuth } from "@/context/authcontext";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import netsuite from '../../../public/netsuite-logo.png'
+import smct from '../../../public/smct_group.png'
 
 export default function Home() {
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const router = useRouter();
-  const [username, setUsername] = useState<string>("");
+  const [branchCode, setBranchCode] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated, router]);
 
   const handleLogin = () => {
-    login(username, password);
-    if (username && password) {
-        router.push('/dashboard');
-      }
+    if (!branchCode || !password){
+      alert('All fields are required!')
+    } else{
+    login(branchCode, password);
+    router.push('/dashboard')
+    }
   };
 
   return (
     <>
-    <div className="flex flex-col w-full items-center mt-20 text-[#333]">
-      <h3 className="font-semibold text-2xl">LOGIN</h3>
-      <div className="flex mt-3 items-center gap-2">
-        <label htmlFor="username" className="font-medium">
-          Username:
+    <div className="mt-20 flex gap-2 items-center justify-center mb-10">
+      <Image src={netsuite} alt="NetSuite" width={200}/>
+      <Image src={smct} alt="SMCT Group of Companies" width={200}/>
+    </div>
+      <h3 className="font-semibold text-2xl mb-5 text-center">LOGIN</h3>
+    <div className="flex w-full justify-center items-center gap-3 text-[#333]">
+      <div className="flex items-center gap-2">
+        <label htmlFor="branchCode" className="font-medium">
+          Branch Code:
         </label>
         <input
           type="text"
-          name="username"
-          id="username"
-          className="border-2 px-1"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          name="branchCode"
+          id="branchCode"
+          className="border-2 rounded-md p-1 uppercase"
+          value={branchCode}
+          onChange={(e) => setBranchCode(e.target.value)}
         />
       </div>
-      <div className="flex mt-3 items-center gap-2">
+      <div className="flex items-center gap-2">
         <label htmlFor="password" className="font-medium">
           Password:
         </label>
@@ -41,12 +56,12 @@ export default function Home() {
           type="password"
           name="password"
           id="password"
-          className="border-2 px-1"
+          className="border-2 rounded-md p-1"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button onClick={handleLogin} className="mt-5 bg-[#607799] text-white border px-3 rounded-sm">Login</button>
+      <button onClick={handleLogin} className="bg-[#607799] text-white border px-3 py-1 rounded-md">Login</button>
     </div>
       </>
   );

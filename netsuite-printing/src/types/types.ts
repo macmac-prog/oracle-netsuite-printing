@@ -1,13 +1,20 @@
 import { ReactNode } from 'react';
 
 export interface User {
-    username: string;
+    branchCode: string;
+    branchName: string;
   }
+
+export interface Branch{
+    branch: string;
+}
+
 export interface AuthContextType {
     isAuthenticated: boolean;
-    login: (username: string, password: string) => void;
+    login: (branchCode: string, password: string) => void;
     logout: () => void;
     user: User | null;
+    branch: Branch | null;
   }
 
 export interface PrivateRouteProps {
