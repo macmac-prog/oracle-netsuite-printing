@@ -32,5 +32,22 @@ export const data = [
         password: "password",
       },
     ],
+  },
+  {
+    branch: "HD",
+    users: [
+      {
+        id: 1,
+        branchCode: "HCAL",
+        branchName: "HD Kalinao",
+        password: "password",
+      },
+      {
+        id: 2,
+        branchCode: "DAH",
+        branchName: "HD Manolo Fortrich",
+        password: "password",
+      },
+    ],
   }
 ];

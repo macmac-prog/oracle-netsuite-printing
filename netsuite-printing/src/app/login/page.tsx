@@ -46,7 +46,7 @@ export default function Home() {
           id="branchCode"
           className="border-2 rounded-md p-1 uppercase"
           value={branchCode}
-          onChange={(e) => setBranchCode(e.target.value)}
+          onChange={(e) => setBranchCode(e.target.value.toUpperCase())}
         />
       </div>
       <div className="flex items-center gap-2">

@@ -4,6 +4,7 @@ import { useAuth } from "@/context/authcontext";
 import { PrivateRouteProps } from "@/types/types";
 import { useEffect, useState } from "react";
 import Navbar from "./navbar";
+import Footer from "./footer";
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -23,7 +24,13 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
     return <div>Loading...</div>;
   }
 
-  return <><Navbar/>{children}</>;
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <div className="flex-1">{children}</div>
+      <Footer />
+    </div>
+  );
 };
 
 export default PrivateRoute;

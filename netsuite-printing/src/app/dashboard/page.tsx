@@ -245,24 +245,26 @@ export default function Page() {
             </tbody>
           </table>
         )} */}
+        {excelData.slice(1).map((row, rowIndex) => (
+        <div key={rowIndex}>
         <div className="my-5 flex justify-between text-sm text-[#333] px-10">
           <div className="flex flex-col gap-2">
             <div className="flex flex-col">
               <p>Internal ID</p>
               <p className="font-semibold">
-                {excelData[2]?.[internalIdColumnIndex] || "N/A"}
+              {row[internalIdColumnIndex] || "N/A"}
               </p>
             </div>
             <div className="flex flex-col">
               <p>Mainline Name</p>
               <p className="font-semibold">
-                {excelData[2]?.[mainLineName] || "N/A"}
+              {row[mainLineName] || "N/A"}
               </p>
             </div>
             <div className="flex flex-col">
               <p>Billing Address</p>
               <p className="font-semibold">
-                {excelData[2]?.[billingAddress] || "N/A"}
+              {row[billingAddress] || "N/A"}
               </p>
             </div>
           </div>
@@ -270,49 +272,54 @@ export default function Page() {
             <div className="flex flex-col">
               <p>Tax Number</p>
               <p className="font-semibold">
-                {excelData[2]?.[taxNumber] || "N/A"}
+              {row[taxNumber] || "N/A"}
               </p>
             </div>
             <div className="flex flex-col">
               <p>Date</p>
-              <p className="font-semibold">{excelData[2]?.[date] || "N/A"}</p>
+              <p className="font-semibold">
+              {row[date] || "N/A"}</p>
             </div>
             <div className="flex flex-col">
               <p>Terms</p>
-              <p className="font-semibold">{excelData[2]?.[terms] || "N/A"}</p>
+              <p className="font-semibold">
+              {row[terms] || "N/A"}</p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex flex-col">
               <p>Item</p>
-              <p className="font-semibold">{excelData[2]?.[item] || "N/A"}</p>
+              <p className="font-semibold">
+              {row[item] || "N/A"}</p>
             </div>
             <div className="flex flex-col">
               <p>Quantity</p>
               <p className="font-semibold">
-                {excelData[2]?.[quantity] || "N/A"}
+              {row[quantity] || "N/A"}
               </p>
             </div>
             <div className="flex flex-col">
               <p>Units</p>
-              <p className="font-semibold">{excelData[2]?.[units] || "N/A"}</p>
+              <p className="font-semibold">
+              {row[units] || "N/A"}</p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <div className="flex flex-col">
               <p>Units</p>
-              <p className="font-semibold">{excelData[2]?.[units] || "N/A"}</p>
+              <p className="font-semibold">
+              {row[units1] || "N/A"}</p>
             </div>
             <div className="flex flex-col">
               <p>Item Rate</p>
               <p className="font-semibold">
-                {excelData[2]?.[itemRate] || "N/A"}
+              {row[itemRate] || "N/A"}
               </p>
             </div>
             <div className="flex flex-col">
               <p>Item Rate</p>
               <p className="font-semibold">
-                {excelData[2]?.[itemRate1] || "N/A"}
+              {row[itemRate1] || "N/A"}
               </p>
             </div>
           </div>
@@ -359,31 +366,31 @@ export default function Page() {
                 <tr>
                   <td className="text-left p-2">Amount</td>
                   <td className="text-right p-2 font-semibold">
-                    {excelData[2]?.[amount] || "N/A"}
+                  {row[amount] || "N/A"}
                   </td>
                 </tr>
                 <tr>
                   <td className="text-left p-2">Total Sales (VAT Inclusive)</td>
                   <td className="text-right p-2 font-semibold">
-                    {excelData[2]?.[totalSales] || "N/A"}
+                  {row[totalSales] || "N/A"}
                   </td>
                 </tr>
                 <tr>
                   <td className="text-left p-2">Amount (Tax)</td>
                   <td className="text-right p-2 font-semibold">
-                    {excelData[2]?.[amountTax] || "N/A"}
+                  {row[amountTax] || "N/A"}
                   </td>
                 </tr>
                 <tr>
                   <td className="text-left p-2">Amount (Net of Tax)</td>
                   <td className="text-right p-2 font-semibold">
-                    {excelData[2]?.[netTax] || "N/A"}
+                  {row[netTax] || "N/A"}
                   </td>
                 </tr>
                 <tr>
                   <td className="text-left p-2">Amount (Transaction Total)</td>
                   <td className="text-right p-2 font-semibold">
-                    {excelData[2]?.[transactionTotal] || "N/A"}
+                  {row[transactionTotal] || "N/A"}
                   </td>
                 </tr>
               </tbody>
@@ -391,6 +398,8 @@ export default function Page() {
           </div>
         </div>
         <div className="w-full flex justify-end pr-5 py-5 my-5 bg-[#dfe4eb]" />
+        </div>
+        ))}
       </div>
     </PrivateRoute>
   );

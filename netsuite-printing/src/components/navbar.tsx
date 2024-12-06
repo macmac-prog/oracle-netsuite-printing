@@ -5,19 +5,40 @@ import dsm from "../../public/dsm.png";
 import hd from "../../public/hd.png";
 import { useAuth } from "@/context/authcontext";
 import { FaAngleDown, FaHome, FaRedo } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
   const { branch, user, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
-    const refreshPage = () => {
-        window.location.reload();
-    }
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const refreshPage = () => {
+      window.location.reload();
+  }
 
   return (
     <>
@@ -35,6 +56,7 @@ export default function Navbar() {
         </div>
         <div>
           <button
+            ref={buttonRef}
             onClick={toggleDropdown}
             className="font-semibold uppercase flex items-center gap-2 text-[#333]"
           >
@@ -42,7 +64,7 @@ export default function Navbar() {
             <FaAngleDown />
           </button>
           {isDropdownOpen && (
-            <div className="absolute right-5 mt-2 py-1 px-5 bg-white border rounded shadow-lg">
+            <div ref={dropdownRef} className="absolute right-5 mt-2 py-1 px-5 bg-white border rounded shadow-lg">
               <button
                 onClick={logout}
                 className="w-full text-left text-sm font-medium text-[#333]"
