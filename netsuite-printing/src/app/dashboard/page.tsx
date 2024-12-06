@@ -116,7 +116,7 @@ export default function Page() {
         </h2>
       </div>
       <div className="mt-5 px-5">
-        <div className="border border-[#005483] pl-5 py-5 w-3/12">
+        <div className="border border-[#005483] pl-5 py-5">
           <p className="mb-2 text-xl">
             {isFileUploaded ? "Imported Data" : "Import Data"}
           </p>
