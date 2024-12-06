@@ -1,7 +1,7 @@
 "use client";
 import PrivateRoute from "@/components/privateroutes";
 import { useAuth } from "@/context/authcontext";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaPrint } from "react-icons/fa";
 import * as XLSX from "xlsx";
 
@@ -9,6 +9,30 @@ export default function Page() {
   const { user } = useAuth();
   const [excelData, setExcelData] = useState<any[][]>([]);
   const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event:any) => {
+      if (
+        buttonRef.current && !buttonRef.current.contains(event.target) &&
+        dropdownRef.current && !dropdownRef.current.contains(event.target)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -91,9 +115,30 @@ export default function Page() {
           } my-5 bg-[#dfe4eb]`}
         >
           {isFileUploaded ? (
+            <>
             <div>
-              <button className="flex items-center gap-2 font-semibold"><FaPrint size={20} color="#333"/>Print Now</button>
+              <button ref={buttonRef} onClick={toggleDropdown} className="flex items-center gap-2 font-semibold"><FaPrint size={20} color="#333"/>Print Now</button>
             </div>
+            {isDropdownOpen && (
+            <div ref={dropdownRef} className="absolute right-5 mt-10 bg-[#dfe4eb] border border-slate-900 shadow-xl">
+              <button
+                className="w-full text-center text-sm font-medium text-[#333] py-1 hover:bg-white"
+              >
+                Recipt 1
+              </button>
+              <button
+                className="w-full text-center text-sm font-medium text-[#333] py-1 hover:bg-white"
+              >
+                Recipt 2
+              </button>
+              <button
+                className="w-full text-center text-sm font-medium text-[#333] py-1 hover:bg-white"
+              >
+                Recipt 3
+              </button>
+            </div>
+          )}
+          </>
           ) : (
             ""
           )}
