@@ -18,7 +18,8 @@ export default function Home() {
     }
   }, [isAuthenticated, router]);
 
-  const handleLogin = () => {
+  const handleLogin = (e: any) => {
+    e.preventDefault();
     if (!branchCode || !password){
       alert('All fields are required!')
     } else{
