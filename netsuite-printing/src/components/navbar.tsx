@@ -3,6 +3,7 @@ import Image from "next/image";
 import smct from "../../public/smct_branch.png";
 import dsm from "../../public/dsm.png";
 import hd from "../../public/hd.png";
+import ho from "../../public/smct_group.png";
 import { useAuth } from "@/context/authcontext";
 import { FaAngleDown, FaHome, FaRedo } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
@@ -50,6 +51,8 @@ export default function Navbar() {
             <Image src={dsm} alt="DES Strong Motors" width={200} />
           ) : branch?.branch === "HD" ? (
             <Image src={hd} alt="Honda DES" width={200} />
+          ) : branch?.branch === "HO" ? (
+            <Image src={ho} alt="SMCT Group of Companies" width={200}/>
           ) : (
             <div>Branch not found...</div>
           )}

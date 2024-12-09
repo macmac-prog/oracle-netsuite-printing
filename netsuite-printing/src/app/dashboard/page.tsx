@@ -146,19 +146,22 @@ export default function Page() {
               {isDropdownOpen && (
                 <div
                   ref={dropdownRef}
-                  className="absolute right-5 mt-10 bg-[#dfe4eb] border border-slate-900 shadow-xl"
+                  className="absolute flex flex-col right-5 mt-10 bg-[#dfe4eb] border border-slate-200 shadow-xl"
                 >
                   <button
                     onClick={() => window.print()}
-                    className="w-full text-center text-sm font-medium text-[#333] py-1 hover:bg-white"
+                    className="px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white"
                   >
-                    Recipt 1
+                    Invoice Receipt
                   </button>
-                  <button className="w-full text-center text-sm font-medium text-[#333] py-1 hover:bg-white">
-                    Recipt 2
+                  <button onClick={() => window.print()} className=" px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white">
+                    Collection Receipt
                   </button>
-                  <button className="w-full text-center text-sm font-medium text-[#333] py-1 hover:bg-white">
-                    Recipt 3
+                  <button onClick={() => window.print()} className="px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white">
+                    Cash Sales Invoice
+                  </button>
+                  <button onClick={()=> window.print()} className="px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white">
+                    Official Receipt
                   </button>
                 </div>
               )}
