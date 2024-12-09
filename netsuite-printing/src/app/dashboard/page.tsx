@@ -1,9 +1,11 @@
 "use client";
 import PrivateRoute from "@/components/privateroutes";
 import { useAuth } from "@/context/authcontext";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaPrint } from "react-icons/fa";
 import * as XLSX from "xlsx";
+import PrintPage from "../print/page";
+import ReactDOM from "react-dom/client";
 
 export default function Page() {
   const { user } = useAuth();
@@ -12,6 +14,51 @@ export default function Page() {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  
+  const handlePrint = () => {
+    const printWindow = window.open("", "_blank");
+    if (printWindow) {
+      const printContent = (
+        <PrintPage data={excelData} />
+      );
+  
+      const printDocument = printWindow.document;
+      printDocument.open();
+      printDocument.write("<html><head><title>Print</title><style>");
+      printDocument.write(`
+        body {
+          font-family: Arial, sans-serif;
+        }
+      `);
+      printDocument.write("</style></head><body>");
+      printDocument.write('<div id="root"></div>');
+      printDocument.write("</body></html>");
+      printDocument.close();
+  
+      printWindow.onload = () => {
+        console.log('Print window loaded');
+        const rootElement = printWindow.document.getElementById("root");
+        if (rootElement) {
+          const reactRoot = ReactDOM.createRoot(rootElement);
+          reactRoot.render(printContent);
+  
+          setTimeout(() => {
+            printWindow.focus();
+            printWindow.print();
+          }, 500);
+        }
+      };
+    }
+  };
+  
+  
+
+  const printOptions = [
+    { label: "Invoice Receipt", action: handlePrint },
+    { label: "Collection Receipt", action: handlePrint },
+    { label: "Cash Sales Invoice", action: handlePrint },
+    { label: "Official Receipt", action: handlePrint },
+  ];
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -148,21 +195,15 @@ export default function Page() {
                   ref={dropdownRef}
                   className="absolute flex flex-col right-5 mt-10 bg-[#dfe4eb] border border-slate-200 shadow-xl"
                 >
-                  <button
-                    onClick={() => window.print()}
-                    className="px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white"
-                  >
-                    Invoice Receipt
-                  </button>
-                  <button onClick={() => window.print()} className=" px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white">
-                    Collection Receipt
-                  </button>
-                  <button onClick={() => window.print()} className="px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white">
-                    Cash Sales Invoice
-                  </button>
-                  <button onClick={()=> window.print()} className="px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white">
-                    Official Receipt
-                  </button>
+                  {printOptions.map((option, index) => (
+                    <button
+                      key={index}
+                      onClick={option.action}
+                      className="px-2 text-center text-sm font-medium text-[#333] py-1 hover:bg-white"
+                    >
+                      {option.label}
+                    </button>
+                  ))}
                 </div>
               )}
             </>
