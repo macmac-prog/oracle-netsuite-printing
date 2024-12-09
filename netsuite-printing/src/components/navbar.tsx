@@ -4,6 +4,7 @@ import smct from "../../public/smct_branch.png";
 import dsm from "../../public/dsm.png";
 import hd from "../../public/hd.png";
 import ho from "../../public/smct_group.png";
+import dap from "../../public/dap.jpg";
 import { useAuth } from "@/context/authcontext";
 import { FaAngleDown, FaHome, FaRedo } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
@@ -53,6 +54,8 @@ export default function Navbar() {
             <Image src={hd} alt="Honda DES" width={200} />
           ) : branch?.branch === "HO" ? (
             <Image src={ho} alt="SMCT Group of Companies" width={200}/>
+          ) : branch?.branch === "DAP" ? (
+            <Image src={dap} alt="DES Appliance Plaza" width={200}/>
           ) : (
             <div>Branch not found...</div>
           )}
