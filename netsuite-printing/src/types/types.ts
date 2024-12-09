@@ -20,3 +20,8 @@ export interface AuthContextType {
 export interface PrivateRouteProps {
     children: ReactNode;
   }
+
+export interface PrintPageProps {
+  componentType?: string;
+  data: any[][];
+}

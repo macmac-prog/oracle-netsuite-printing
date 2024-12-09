@@ -1,10 +1,9 @@
-//This size is compatible with SMCT Carmen and SMCT Tanza 2
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
 import CR_TypeA from "@/utils/CR_TypeA";
 import React, { useEffect } from "react";
 
-const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
+const OfficialReceipt: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
 
   useEffect(() => {
@@ -22,4 +21,4 @@ const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
   );
 };
 
-export default CollectionReceipt;
+export default OfficialReceipt;

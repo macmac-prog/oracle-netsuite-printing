@@ -4,7 +4,7 @@ import { PrintPageProps } from "@/types/types";
 import CR_TypeA from "@/utils/CR_TypeA";
 import React, { useEffect } from "react";
 
-const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
+const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
 
   useEffect(() => {
@@ -22,4 +22,4 @@ const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
   );
 };
 
-export default CollectionReceipt;
+export default CashSalesInvoice;

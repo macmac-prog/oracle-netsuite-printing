@@ -15,11 +15,11 @@ export default function Page() {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   
-  const handlePrint = () => {
+  const handlePrint = (componentType: string) => {
     const printWindow = window.open("", "_blank");
     if (printWindow) {
       const printContent = (
-        <PrintPage data={excelData} />
+        <PrintPage componentType={componentType} data={excelData} />
       );
   
       const printDocument = printWindow.document;
@@ -52,13 +52,14 @@ export default function Page() {
   };
   
   
+  
 
   const printOptions = [
-    { label: "Invoice Receipt", action: handlePrint },
-    { label: "Collection Receipt", action: handlePrint },
-    { label: "Cash Sales Invoice", action: handlePrint },
-    { label: "Official Receipt", action: handlePrint },
-  ];
+    { label: "Invoice Receipt", action: () => handlePrint("Invoice Receipt") },
+    { label: "Collection Receipt", action: () => handlePrint("Collection Receipt") },
+    { label: "Cash Sales Invoice", action: () => handlePrint("Cash Sales Invoice") },
+    { label: "Official Receipt", action: () => handlePrint("Official Receipt") },
+  ];  
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
