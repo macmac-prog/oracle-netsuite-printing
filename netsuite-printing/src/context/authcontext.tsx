@@ -43,10 +43,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         (user) => user.branchCode === branchCode && user.password === password
       );
       if (foundUser) {
+        const { password, ...Datas } = foundUser;
         setUser(foundUser);
         setBranch(foundBranch);
         setIsAuthenticated(true);
-        localStorage.setItem('user', JSON.stringify(foundUser));
+        localStorage.setItem('user', JSON.stringify(Datas));
         // localStorage.setItem('branch', JSON.stringify(foundBranch));
       }
     } else {

@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-    <form onSubmit={handleLogin}>
+    <form onSubmit={handleLogin} method="POST">
     <div className="mt-20 flex gap-2 items-center justify-center mb-10">
       <Image src={netsuite} alt="NetSuite" width={200}/>
       <Image src={smct} alt="SMCT Group of Companies" width={200}/>
