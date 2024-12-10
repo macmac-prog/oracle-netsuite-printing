@@ -4,14 +4,10 @@ import CollectionReceipt from "@/constants/CollectionReceipt";
 import OfficialReceipt from "@/constants/OfficialReceipt";
 import { AuthProvider } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
-import React, { useEffect } from "react";
 
 
 
 const PrintPage: React.FC<PrintPageProps> = ({ data, componentType }) => {
-  useEffect(() => {
-    window.print();
-  }, []);
 
     const renderReceiptComponent = () => {
         switch (componentType) {

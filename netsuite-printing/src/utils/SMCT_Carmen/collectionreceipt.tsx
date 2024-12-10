@@ -1,13 +1,9 @@
 'use client'
 import { PrintPageProps } from "@/types/types";
-import React, { useEffect } from "react";
 
 
 
 const CollectionSmctCarmen: React.FC<PrintPageProps> = ({ data }) => {
-  useEffect(() => {
-    window.print();
-  }, []);
   
   const internalIdColumnIndex = 0;
   const mainLineName = 1;

@@ -3,14 +3,9 @@ import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
 import CollectionSmctCarmen from "@/utils/SMCT_Carmen/collectionreceipt";
 import CollectionSmctTanza2 from "@/utils/SMCT_Tanza2/collectionreceipt";
-import React, { useEffect } from "react";
 
 const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
-
-  useEffect(() => {
-    window.print();
-  }, []);
 
   return (
     // <div>

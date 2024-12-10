@@ -45,7 +45,7 @@ export default function Page() {
           setTimeout(() => {
             printWindow.focus();
             printWindow.print();
-          }, 500);
+          }, 50);
         }
       };
     }
