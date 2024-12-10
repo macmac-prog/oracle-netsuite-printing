@@ -55,7 +55,6 @@ export default function Page() {
   
 
   const printOptions = [
-    { label: "Invoice Receipt", action: () => handlePrint("Invoice Receipt") },
     { label: "Collection Receipt", action: () => handlePrint("Collection Receipt") },
     { label: "Cash Sales Invoice", action: () => handlePrint("Cash Sales Invoice") },
     { label: "Official Receipt", action: () => handlePrint("Official Receipt") },

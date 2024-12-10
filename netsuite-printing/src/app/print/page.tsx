@@ -1,3 +1,4 @@
+'use client'
 import CashSalesInvoice from "@/constants/CashSalesInvoice";
 import CollectionReceipt from "@/constants/CollectionReceipt";
 import OfficialReceipt from "@/constants/OfficialReceipt";

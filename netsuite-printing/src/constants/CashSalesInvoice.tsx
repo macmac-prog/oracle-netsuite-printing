@@ -1,7 +1,7 @@
 //This size is compatible with SMCT Carmen and SMCT Tanza 2
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
-import CR_TypeA from "@/utils/CR_TypeA";
+import CR_TypeA from "@/utils/SMCT_Carmen/collectionreceipt";
 import React, { useEffect } from "react";
 
 const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {

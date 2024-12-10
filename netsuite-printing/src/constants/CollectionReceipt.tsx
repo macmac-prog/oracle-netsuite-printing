@@ -1,7 +1,8 @@
-//This size is compatible with SMCT Carmen and SMCT Tanza 2
+"use client";
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
-import CR_TypeA from "@/utils/CR_TypeA";
+import CollectionSmctCarmen from "@/utils/SMCT_Carmen/collectionreceipt";
+import CollectionSmctTanza2 from "@/utils/SMCT_Tanza2/collectionreceipt";
 import React, { useEffect } from "react";
 
 const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
@@ -12,13 +13,29 @@ const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
   }, []);
 
   return (
+    // <div>
+    //   {user?.branchName === "SMCT Carmen" ? (
+    //     <CollectionSmctCarmen data={data} />
+    //   ) : user?.branchName === "SMCT Tanza 2" ? (
+    //     <CollectionSmctTanza2 data={data} />
+    //   ) : (
+    //     <>None</>
+    //   )}
+    // </div>
+
     <div>
-      {user?.branchName === "SMCT Carmen" || "SMCT Tanza 2" ? (
-        <CR_TypeA data={data} />
-      ) : (
-        <>None</>
-      )}
+      {(() => {
+        switch (user?.branchName) {
+          case "SMCT Carmen":
+            return <CollectionSmctCarmen data={data} />;
+          case "SMCT Tanza 2":
+            return <CollectionSmctTanza2 data={data} />;
+          default:
+            return <>None</>;
+        }
+      })()}
     </div>
+    // <CollectionSmctCarmen data={data} />
   );
 };
 

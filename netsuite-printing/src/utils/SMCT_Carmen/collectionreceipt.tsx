@@ -1,11 +1,9 @@
-//This size is compatible with SMCT Carmen and SMCT Tanza 2
-//W205-H108
 import { PrintPageProps } from "@/types/types";
 import React, { useEffect } from "react";
 
 
 
-const CR_TypeA: React.FC<PrintPageProps> = ({ data }) => {
+const CollectionSmctCarmen: React.FC<PrintPageProps> = ({ data }) => {
   useEffect(() => {
     window.print();
   }, []);
@@ -33,6 +31,7 @@ const CR_TypeA: React.FC<PrintPageProps> = ({ data }) => {
 
   return (
     <div className="text-xs">
+      <p>Carmen</p>
         <div className="w-full flex">
             <div className="flex w-full">
                 <p>Sold to No data</p>
@@ -60,4 +59,4 @@ const CR_TypeA: React.FC<PrintPageProps> = ({ data }) => {
   );
 };
 
-export default CR_TypeA;
+export default CollectionSmctCarmen;
