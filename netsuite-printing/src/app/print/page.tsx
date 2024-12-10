@@ -2,6 +2,7 @@
 import CashSalesInvoice from "@/constants/CashSalesInvoice";
 import CollectionReceipt from "@/constants/CollectionReceipt";
 import OfficialReceipt from "@/constants/OfficialReceipt";
+import { AuthProvider } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
 import React, { useEffect } from "react";
 
@@ -25,7 +26,7 @@ const PrintPage: React.FC<PrintPageProps> = ({ data, componentType }) => {
         }
       };
     
-      return <div>{renderReceiptComponent()}</div>;
+      return <div><AuthProvider>{renderReceiptComponent()}</AuthProvider></div>;
 };
 
 export default PrintPage;

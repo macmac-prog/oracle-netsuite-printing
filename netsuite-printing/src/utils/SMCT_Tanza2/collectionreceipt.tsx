@@ -1,3 +1,4 @@
+'use client'
 import { PrintPageProps } from "@/types/types";
 import React, { useEffect } from "react";
 

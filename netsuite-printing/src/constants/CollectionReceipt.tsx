@@ -35,6 +35,8 @@ const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
         }
       })()}
     </div>
+
+
     // <CollectionSmctCarmen data={data} />
   );
 };
