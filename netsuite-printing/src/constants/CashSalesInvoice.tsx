@@ -70,7 +70,7 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
       } else if (size9.some((branch) => branch === user?.branchCode)) {
         return <Size9Sales data={data} />;
       } else {
-        return <>None</>;
+        return <div className="text-center flex items-center justify-center h-screen font-bold text-lg">Sorry, you don't have permission for printing</div>;
       }
     })()}
   </div>

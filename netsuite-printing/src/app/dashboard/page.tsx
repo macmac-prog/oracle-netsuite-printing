@@ -24,7 +24,14 @@ export default function Page() {
   
       const printDocument = printWindow.document;
       printDocument.open();
-      printDocument.write("<html><head><title>Print</title><style>");
+      printDocument.write(`
+        <html>
+        <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>
+        Print
+        </title>
+        <style>`);
       printDocument.write(`
         body {
           font-family: Arial, sans-serif;
