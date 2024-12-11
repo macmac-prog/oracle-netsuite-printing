@@ -3,7 +3,7 @@ import { PrintPageProps } from "@/types/types";
 
 
 
-const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
+const Size6Sales: React.FC<PrintPageProps> = ({ data }) => {
   
   const internalIdColumnIndex = 0;
   const mainLineName = 1;
@@ -55,4 +55,4 @@ const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
   );
 };
 
-export default Size1Sales;
+export default Size6Sales;
