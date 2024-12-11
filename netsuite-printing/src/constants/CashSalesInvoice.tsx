@@ -7,7 +7,7 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
 
   return (
   <div>
-    {["SMCT Carmen", "SMCT Tanza 2"].some(branch => branch === user?.branchName) ? (
+    {["DSMC", "INAB"].some(branch => branch === user?.branchCode) ? (
       <Size1 data={data} />
     ) : (
       <>None</>

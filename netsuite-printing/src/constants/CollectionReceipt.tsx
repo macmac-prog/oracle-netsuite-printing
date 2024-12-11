@@ -10,12 +10,12 @@ const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
   return (
     <div>
       {(() => {
-        const size1 = ["SMCT Carmen", "SMCT Loay"];
-        const size2 = ["SMCT Tanza 2", "SMCT Aurora"];
+        const size1 = ["JIME", "MADRI"];
+        const size2 = ["GENT", "INIT2"];
 
-        if (size1.some((branch) => branch === user?.branchName)) {
+        if (size1.some((branch) => branch === user?.branchCode)) {
           return <Size1Collection data={data} />;
-        } else if (size2.some((branch) => branch === user?.branchName)) {
+        } else if (size2.some((branch) => branch === user?.branchCode)) {
           return <Size2Collection data={data} />;
         } else {
           return <>None</>;
