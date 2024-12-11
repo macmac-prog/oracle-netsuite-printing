@@ -1,7 +1,8 @@
 "use client";
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
-import Size1 from "@/utils/collectionreceipt/size1";
+import Size1Collection from "@/utils/collectionreceipt/size1";
+import Size2Collection from "@/utils/collectionreceipt/size2";
 
 const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
@@ -13,9 +14,9 @@ const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
         const size2 = ["SMCT Tanza 2", "SMCT Aurora"];
 
         if (size1.some((branch) => branch === user?.branchName)) {
-          return <Size1 data={data} />;
+          return <Size1Collection data={data} />;
         } else if (size2.some((branch) => branch === user?.branchName)) {
-          return <Size1 data={data} />;
+          return <Size2Collection data={data} />;
         } else {
           return <>None</>;
         }
