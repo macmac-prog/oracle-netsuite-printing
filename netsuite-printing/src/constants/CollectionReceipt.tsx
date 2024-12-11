@@ -1,8 +1,8 @@
 "use client";
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
-import CollectionSmctCarmen from "@/utils/SMCT_Carmen/collectionreceipt";
-import CollectionSmctTanza2 from "@/utils/SMCT_Tanza2/collectionreceipt";
+import CollectionSmctCarmen from "@/utils/SMCT/SMCT_Carmen/collectionreceipt";
+import CollectionSmctTanza2 from "@/utils/SMCT/SMCT_Tanza2/collectionreceipt";
 
 const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
@@ -30,9 +30,6 @@ const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
         }
       })()}
     </div>
-
-
-    // <CollectionSmctCarmen data={data} />
   );
 };
 

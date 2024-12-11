@@ -1,6 +1,6 @@
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
-import CR_TypeA from "@/utils/SMCT_Carmen/collectionreceipt";
+import CR_TypeA from "@/utils/SMCT/SMCT_Carmen/collectionreceipt";
 
 const OfficialReceipt: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
