@@ -1,18 +1,18 @@
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
-import CR_TypeA from "@/utils/SMCT/SMCT_Carmen/collectionreceipt";
+import Size1 from "@/utils/collectionreceipt/size1";
 
 const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
 
   return (
-    <div>
-      {user?.branchName === "SMCT Carmen" || "SMCT Tanza 2" ? (
-        <CR_TypeA data={data} />
-      ) : (
-        <>None</>
-      )}
-    </div>
+  <div>
+    {["SMCT Carmen", "SMCT Tanza 2"].some(branch => branch === user?.branchName) ? (
+      <Size1 data={data} />
+    ) : (
+      <>None</>
+    )}
+  </div>
   );
 };
 

@@ -3,7 +3,7 @@ import { PrintPageProps } from "@/types/types";
 
 
 
-const CollectionSmctTanza2: React.FC<PrintPageProps> = ({ data }) => {
+const Size1: React.FC<PrintPageProps> = ({ data }) => {
   
   const internalIdColumnIndex = 0;
   const mainLineName = 1;
@@ -56,4 +56,4 @@ const CollectionSmctTanza2: React.FC<PrintPageProps> = ({ data }) => {
   );
 };
 
-export default CollectionSmctTanza2;
+export default Size1;

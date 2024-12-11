@@ -1,35 +1,39 @@
 "use client";
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
-import CollectionSmctCarmen from "@/utils/SMCT/SMCT_Carmen/collectionreceipt";
-import CollectionSmctTanza2 from "@/utils/SMCT/SMCT_Tanza2/collectionreceipt";
+import Size1 from "@/utils/collectionreceipt/size1";
 
 const CollectionReceipt: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
 
   return (
-    // <div>
-    //   {user?.branchName === "SMCT Carmen" ? (
-    //     <CollectionSmctCarmen data={data} />
-    //   ) : user?.branchName === "SMCT Tanza 2" ? (
-    //     <CollectionSmctTanza2 data={data} />
-    //   ) : (
-    //     <>None</>
-    //   )}
-    // </div>
-
     <div>
       {(() => {
-        switch (user?.branchName) {
-          case "SMCT Carmen":
-            return <CollectionSmctCarmen data={data} />;
-          case "SMCT Tanza 2":
-            return <CollectionSmctTanza2 data={data} />;
-          default:
-            return <>None</>;
+        const size1 = ["SMCT Carmen", "SMCT Loay"];
+        const size2 = ["SMCT Tanza 2", "SMCT Aurora"];
+
+        if (size1.some((branch) => branch === user?.branchName)) {
+          return <Size1 data={data} />;
+        } else if (size2.some((branch) => branch === user?.branchName)) {
+          return <Size1 data={data} />;
+        } else {
+          return <>None</>;
         }
       })()}
     </div>
+
+    // <div>
+    //   {(() => {
+    //     switch (user?.branchName) {
+    //       case "SMCT Carmen":
+    //         return <Size1 data={data} />;
+    //       case "SMCT Tanza 2":
+    //         return <Size1 data={data} />;
+    //       default:
+    //         return <>None</>;
+    //     }
+    //   })()}
+    // </div>
   );
 };
 
