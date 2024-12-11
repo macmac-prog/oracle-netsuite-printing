@@ -1,10 +1,7 @@
-'use client'
+"use client";
 import { PrintPageProps } from "@/types/types";
 
-
-
 const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
-  
   const internalIdColumnIndex = 0;
   const mainLineName = 1;
   const billingAddress = 2;
@@ -27,21 +24,24 @@ const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
   const transactionTotal = 19;
 
   return (
-    <div className="text-xs">
-        <div className="w-full flex">
-            <div className="flex w-full">
-                <p>Sold to No data</p>
-                <p>Tin No data</p>
-                <p>{data[billingAddress]?.[2]}</p>
-            </div>
-            <div className="w-full">
-                <p>{data[date]?.[7]}</p>
-            </div>
-        </div>
+    <div className="text-xs h-[774.7px] w-[600.5px] border">
+      <div className="w-full flex mt-[139.8px]">
+        <p className="ml-[109.6px]">Sold to No data</p>
+        <p className="ml-[321.2px]">{data[date]?.[7]}</p>
+      </div>
+      <div className="w-full flex">
+        <p className="ml-[109.6px]">Tin No data</p>
+        <p className="ml-[321.2px]">Terms</p>
+      </div>
+
+      <div className="w-full flex">
+        <p className="ml-[109.6px]">Address</p>
+        <p className="ml-[321.2px]">OSCA/PWD ID NO</p>
+      </div>
       <table className="border-collapse w-full">
         <tbody>
           {data.slice(1).map((row, index) => (
-            <tr key={index}>
+            <tr key={index} className="text-xs">
               <td>{row[10]}</td>
               <td>{row[11]}</td>
               <td>{row[9]}</td>
