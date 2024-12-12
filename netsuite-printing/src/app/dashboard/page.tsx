@@ -14,14 +14,14 @@ export default function Page() {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  
+
   const handlePrint = (componentType: string) => {
     const printWindow = window.open("", "_blank");
     if (printWindow) {
       const printContent = (
         <PrintPage componentType={componentType} data={excelData} />
       );
-  
+
       const printDocument = printWindow.document;
       printDocument.open();
       printDocument.write(`
@@ -33,6 +33,9 @@ export default function Page() {
         </title>
         <style>`);
       printDocument.write(`
+        @page {
+        margin: 0;
+        }
         body {
           font-family: Arial, sans-serif;
         }
@@ -41,14 +44,14 @@ export default function Page() {
       printDocument.write('<div id="root"></div>');
       printDocument.write("</body></html>");
       printDocument.close();
-  
+
       printWindow.onload = () => {
-        console.log('Print window loaded');
+        console.log("Print window loaded");
         const rootElement = printWindow.document.getElementById("root");
         if (rootElement) {
           const reactRoot = ReactDOM.createRoot(rootElement);
           reactRoot.render(printContent);
-  
+
           setTimeout(() => {
             printWindow.focus();
             printWindow.print();
@@ -57,14 +60,17 @@ export default function Page() {
       };
     }
   };
-  
-  
-  
 
   const printOptions = [
-    { label: "Collection Receipt", action: () => handlePrint("Collection Receipt") },
-    { label: "Cash Sales Invoice", action: () => handlePrint("Cash Sales Invoice") },
-  ];  
+    {
+      label: "Collection Receipt",
+      action: () => handlePrint("Collection Receipt"),
+    },
+    {
+      label: "Cash Sales Invoice",
+      action: () => handlePrint("Cash Sales Invoice"),
+    },
+  ];
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -296,84 +302,69 @@ export default function Page() {
           </table>
         )} */}
         {excelData.slice(1).map((row, rowIndex) => (
-        <div key={rowIndex}>
-        <div className="my-5 flex justify-between text-sm text-[#333] px-10">
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col">
-              <p>Internal ID</p>
-              <p className="font-semibold">
-              {row[internalIdColumnIndex] || "N/A"}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <p>Mainline Name</p>
-              <p className="font-semibold">
-              {row[mainLineName] || "N/A"}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <p>Billing Address</p>
-              <p className="font-semibold">
-              {row[billingAddress] || "N/A"}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col">
-              <p>Tax Number</p>
-              <p className="font-semibold">
-              {row[taxNumber] || "N/A"}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <p>Date</p>
-              <p className="font-semibold">
-              {row[date] || "N/A"}</p>
-            </div>
-            <div className="flex flex-col">
-              <p>Terms</p>
-              <p className="font-semibold">
-              {row[terms] || "N/A"}</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col">
-              <p>Item</p>
-              <p className="font-semibold">
-              {row[item] || "N/A"}</p>
-            </div>
-            <div className="flex flex-col">
-              <p>Quantity</p>
-              <p className="font-semibold">
-              {row[quantity] || "N/A"}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <p>Units</p>
-              <p className="font-semibold">
-              {row[units] || "N/A"}</p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col">
-              <p>Units</p>
-              <p className="font-semibold">
-              {row[units1] || "N/A"}</p>
-            </div>
-            <div className="flex flex-col">
-              <p>Item Rate</p>
-              <p className="font-semibold">
-              {row[itemRate] || "N/A"}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <p>Item Rate</p>
-              <p className="font-semibold">
-              {row[itemRate1] || "N/A"}
-              </p>
-            </div>
-          </div>
-          {/* <div className="flex flex-col gap-2">
+          <div key={rowIndex}>
+            <div className="my-5 flex justify-between text-sm text-[#333] px-10">
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
+                  <p>Internal ID</p>
+                  <p className="font-semibold">
+                    {row[internalIdColumnIndex] || "N/A"}
+                  </p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Mainline Name</p>
+                  <p className="font-semibold">{row[mainLineName] || "N/A"}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Billing Address</p>
+                  <p className="font-semibold">
+                    {row[billingAddress] || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
+                  <p>Tax Number</p>
+                  <p className="font-semibold">{row[taxNumber] || "N/A"}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Date</p>
+                  <p className="font-semibold">{row[date] || "N/A"}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Terms</p>
+                  <p className="font-semibold">{row[terms] || "N/A"}</p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
+                  <p>Item</p>
+                  <p className="font-semibold">{row[item] || "N/A"}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Quantity</p>
+                  <p className="font-semibold">{row[quantity] || "N/A"}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Units</p>
+                  <p className="font-semibold">{row[units] || "N/A"}</p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-col">
+                  <p>Units</p>
+                  <p className="font-semibold">{row[units1] || "N/A"}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Item Rate</p>
+                  <p className="font-semibold">{row[itemRate] || "N/A"}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Item Rate</p>
+                  <p className="font-semibold">{row[itemRate1] || "N/A"}</p>
+                </div>
+              </div>
+              {/* <div className="flex flex-col gap-2">
             <div className="flex flex-col">
               <p>Amount</p>
               <p className="font-semibold">{excelData[2]?.[amount] || "N/A"}</p>
@@ -391,7 +382,7 @@ export default function Page() {
               </p>
             </div>
           </div> */}
-          {/* <div className="flex flex-col gap-2">
+              {/* <div className="flex flex-col gap-2">
             <div className="flex flex-col">
               <p>Amount (Net of Tax)</p>
               <p className="font-semibold">{excelData[2]?.[netTax] || "N/A"}</p>
@@ -403,52 +394,56 @@ export default function Page() {
               </p>
             </div>
           </div> */}
-          <div>
-            <table>
-              <thead>
-                <tr className="bg-[#607799]">
-                  <th colSpan={2} className="text-white p-2 text-left">
-                    SUMMARY
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-[#f1f1f1]">
-                <tr>
-                  <td className="text-left p-2">Amount</td>
-                  <td className="text-right p-2 font-semibold">
-                  {row[amount] || "N/A"}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-left p-2">Total Sales (VAT Inclusive)</td>
-                  <td className="text-right p-2 font-semibold">
-                  {row[totalSales] || "N/A"}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-left p-2">Amount (Tax)</td>
-                  <td className="text-right p-2 font-semibold">
-                  {row[amountTax] || "N/A"}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-left p-2">Amount (Net of Tax)</td>
-                  <td className="text-right p-2 font-semibold">
-                  {row[netTax] || "N/A"}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="text-left p-2">Amount (Transaction Total)</td>
-                  <td className="text-right p-2 font-semibold">
-                  {row[transactionTotal] || "N/A"}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+              <div>
+                <table>
+                  <thead>
+                    <tr className="bg-[#607799]">
+                      <th colSpan={2} className="text-white p-2 text-left">
+                        SUMMARY
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-[#f1f1f1]">
+                    <tr>
+                      <td className="text-left p-2">Amount</td>
+                      <td className="text-right p-2 font-semibold">
+                        {row[amount] || "N/A"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-left p-2">
+                        Total Sales (VAT Inclusive)
+                      </td>
+                      <td className="text-right p-2 font-semibold">
+                        {row[totalSales] || "N/A"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-left p-2">Amount (Tax)</td>
+                      <td className="text-right p-2 font-semibold">
+                        {row[amountTax] || "N/A"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-left p-2">Amount (Net of Tax)</td>
+                      <td className="text-right p-2 font-semibold">
+                        {row[netTax] || "N/A"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-left p-2">
+                        Amount (Transaction Total)
+                      </td>
+                      <td className="text-right p-2 font-semibold">
+                        {row[transactionTotal] || "N/A"}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div className="w-full flex justify-end pr-5 py-5 my-5 bg-[#dfe4eb]" />
           </div>
-        </div>
-        <div className="w-full flex justify-end pr-5 py-5 my-5 bg-[#dfe4eb]" />
-        </div>
         ))}
       </div>
     </PrivateRoute>
