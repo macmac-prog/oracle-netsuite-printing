@@ -33,7 +33,7 @@ export default function Page() {
         </title>
         <style>`);
       printDocument.write(`
-        @page {
+        @page{
         margin: 0;
         }
         body {
