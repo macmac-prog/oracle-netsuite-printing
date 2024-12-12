@@ -24,9 +24,9 @@ const Size4Collection: React.FC<PrintPageProps> = ({ data }) => {
   const transactionTotal = 19;
 
   return (
-    <div className="text-xs flex justify-evenly w-[813px] h-[435px] pl-[45px] pr-[38px] pt-[27px] border-2">
+    <div className="text-sm flex justify-evenly w-[813px] h-[435px] pl-[45px] pr-[38px] pt-[27px] border-2">
       <div className="w-[212px] mt-[30px] mr-[11px]">
-        <table className="text-xs">
+        <table className="text-sm">
           <tbody>
             {data.slice(1).map((row, index) => (
               <tr key={index}>
@@ -34,6 +34,19 @@ const Size4Collection: React.FC<PrintPageProps> = ({ data }) => {
                 <td className="text-center py-[0.5] w-[106px]">{row[amount]}</td>
               </tr>
             ))}
+            <tr className="h-[19px]"></tr>
+            <tr>
+              <td className="text-left py-[0.5] w-[106px]"></td>
+              <td className="text-center py-[0.5] w-[106px]">Data</td>
+            </tr>
+            <tr>
+              <td className="text-left py-[0.5] w-[106px]"></td>
+              <td className="text-center py-[0.5] w-[106px]">Data</td>
+            </tr>
+            <tr>
+              <td className="text-left py-[0.5] w-[106px]"></td>
+              <td className="text-center py-[0.5] w-[106px]">Data</td>
+            </tr>
           </tbody>
         </table>
       </div>
