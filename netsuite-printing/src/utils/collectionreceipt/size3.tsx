@@ -35,8 +35,10 @@ const Size3Collection: React.FC<PrintPageProps> = ({ data }) => {
       </div>
       <table className="w-[642.5px] text-sm">
         <thead>
+          <tr>
           <th className="w-[529px] h-[23px]"/>
           <th className="w-[113px] h-[23px]"/>
+          </tr>
         </thead>
         <tbody>
           <td className="w-[529px] pl-[92px] text-wrap">
