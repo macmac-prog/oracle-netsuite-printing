@@ -24,28 +24,26 @@ const Size4Collection: React.FC<PrintPageProps> = ({ data }) => {
   const transactionTotal = 19;
 
   return (
-    <div className="text-sm flex justify-evenly w-[813px] h-[435px] pl-[45px] pr-[38px] pt-[27px] border-2">
+    <div className="text-sm flex justify-evenly w-[812px] h-[434px] pl-[45px] pr-[38px] pt-[27px] border-2 border-black">
       <div className="w-[212px] mt-[30px] mr-[11px]">
         <table className="text-sm">
           <tbody>
-            {data.slice(1).map((row, index) => (
-              <tr key={index}>
-                <td className="text-center py-[0.5] w-[106px]">{row[internalIdColumnIndex]}</td>
-                <td className="text-center py-[0.5] w-[106px]">{row[amount]}</td>
+              <tr className="h-[19px]">
+                <td className="text-center w-[106px]"></td>
+                <td className="text-center w-[106px]"></td>
               </tr>
-            ))}
             <tr className="h-[19px]"></tr>
-            <tr>
-              <td className="text-left py-[0.5] w-[106px]"></td>
-              <td className="text-center py-[0.5] w-[106px]">Data</td>
+            <tr className="h-[19px]">
+              <td className="text-left w-[106px]"></td>
+              <td className="text-center w-[106px]"></td>
             </tr>
-            <tr>
-              <td className="text-left py-[0.5] w-[106px]"></td>
-              <td className="text-center py-[0.5] w-[106px]">Data</td>
+            <tr className="h-[19px]">
+              <td className="text-left w-[106px]"></td>
+              <td className="text-center w-[106px]"></td>
             </tr>
-            <tr>
-              <td className="text-left py-[0.5] w-[106px]"></td>
-              <td className="text-center py-[0.5] w-[106px]">Data</td>
+            <tr className="h-[19px]">
+              <td className="text-left w-[106px]"></td>
+              <td className="text-center w-[106px]"></td>
             </tr>
           </tbody>
         </table>
@@ -55,21 +53,21 @@ const Size4Collection: React.FC<PrintPageProps> = ({ data }) => {
           <p>{data[1]?.[date]}</p>
         </div>
         <div className="flex justify-between h-[19px]">
-          <p className="ml-[68px]">{data[mainLineName]?.[1]}</p>
+          <p className="ml-[68px]">Noreen Angeleen S. Darunday</p>
           <p>TIN NUMBER 0186957</p>
         </div>
         <div className="h-[19px]">
-          <p className="ml-[68px]">{data[billingAddress]?.[2]}</p>
+          <p className="ml-[68px]">Poblacion, Corella, Bohol</p>
         </div>
         <div className="h-[19px]">
-          <p className="ml-[68px]">Business style what?</p>
+          <p className="ml-[68px]">Motorcycle installment for the year 2024 and so on vice versa</p>
         </div>
         <div className="h-[19px]">
-          <p>{data[billingAddress1]?.[11]}</p>
+          <p>One hundred thousand only</p>
         </div>
         <div className="h-[19px] flex">
-          <p className="ml-[19px] mr-[132px]">{data[2]?.[amount]}</p>
-          <p>Car distributalrml</p>
+          <p className="ml-[19px] mr-[132px]">100,000</p>
+          <p>Car installment for year 20</p>
         </div>
       </div>
     </div>

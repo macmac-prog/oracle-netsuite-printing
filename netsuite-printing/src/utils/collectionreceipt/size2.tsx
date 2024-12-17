@@ -24,11 +24,11 @@ const Size2Collection: React.FC<PrintPageProps> = ({ data }) => {
   const transactionTotal = 19;
 
   return (
-    <div className="text-sm w-[767px] h-[396px] pt-[106px] border-2">
+    <div className="text-sm w-[774.8px] h-[396.8px] pt-[106px] border-2">
       <div>
-        <p className="ml-[144px] text-xs">{data[1]?.[mainLineName]}</p>
+        <p className="ml-[189px] text-xs">{data[1]?.[mainLineName]}</p>
       </div>
-      <div className="ml-[144px]">
+      <div className="ml-[189px]">
         <p>{data[1]?.[mainLineName]}</p>
         <p>Tin number 0123758</p>
         <p>{data[1]?.[billingAddress]}</p>
