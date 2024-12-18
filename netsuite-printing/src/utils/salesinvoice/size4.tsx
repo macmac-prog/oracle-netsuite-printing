@@ -24,8 +24,8 @@ const Size4Sales: React.FC<PrintPageProps> = ({ data }) => {
   const transactionTotal = 19;
 
   return (
-    <div className="text-xs h-[510.2px] w-[767.3px]">
-      <div className="flex mt-[113px]">
+    <div className="text-xs h-[650px] w-[767.3px] border">
+      <div className="flex mt-[119.1px]">
         <p className="w-[514px] pl-[151.1px]">Sold to No data</p>
         <p className="w-[260.8px] pl-[109.6px]">{data[date]?.[7]}</p>
       </div>
@@ -41,83 +41,87 @@ const Size4Sales: React.FC<PrintPageProps> = ({ data }) => {
         <p className="w-[514px] pl-[151.1px]">Business style</p>
         <p className="w-[260.8px] pl-[109.6px]"></p>
       </div>
-      <div className="mx-[37.8px] mt-[26px] h-[90.7px] mb-[22.7px]">
+      <div className="mx-[52.9px] mt-[28px] h-[207.9px] border">
         <table className="border-collapse w-full">
           <tbody>
-            {data.slice(1, 4).map((row, index) => (
+            {data.slice(1, 11).map((row, index) => (
               <tr key={index} className="text-[10px] text-center">
-                <td className="w-[68px] h-[22.7px]">{row[10]}</td>
-                <td className="w-[49.1px] h-[22.7px]">{row[11]}</td>
+                <td className="w-[113.38px] h-[19px]">{row[10]}</td>
+                <td className="w-[117.16px] h-[19px]">{row[11]}</td>
                 <td
-                  className={`w-[313.7px] h-[22.7px] ${
+                  className={`w-[249.45px] h-[19px] ${
                     row[9]?.length > 41 ? "text-[7px]" : ""
                   }`}
                 >
                   {row[9]}
                 </td>
-                <td className="w-[158.7px] h-[22.7px]">{row[13]}</td>
-                <td className="w-[109.6.2px] h-[22.7px]">{row[15]}</td>
+                <td className="w-[162.52px] h-[19px]">{row[13]}</td>
+                <td className="w-[136.1px] h-[19px]">{row[15]}</td>
               </tr>
             ))}
-            <tr className="text-[10px] text-center">
-              <td className="w-[68px] h-[22.7px]"></td>
-              <td className="w-[49.1px] h-[22.7px]"></td>
-              <td className={`w-[313.7px] h-[22.7px]`}></td>
-              <td className="w-[158.7px] h-[22.7px]"></td>
-              <td className="w-[109.6px] h-[22.7px]">PHP100.00</td>
-            </tr>
-            <tr className="text-[10px] text-center">
-              <td className="w-[68px] h-[22.7px]"></td>
-              <td className="w-[49.1px] h-[22.7px]"></td>
-              <td className={`w-[313.7px] h-[22.7px]`}></td>
-              <td className="w-[158.7px] h-[22.7px]"></td>
-              <td className="w-[109.6px] h-[22.7px]">PHP10,000.00</td>
-            </tr>
           </tbody>
         </table>
       </div>
-      <div className="mx-[37.8px] h-[166.3px]">
+      <div className="mx-[52.9px] border">
+        <table className="border-collapse w-full">
+          <tr className="text-[10px] text-center">
+            <td className="w-[113.38px] h-[19px]"></td>
+            <td className="w-[117.16px] h-[19px]"></td>
+            <td className={`w-[249.45px] h-[19px]`}></td>
+            <td className="w-[162.52px] h-[19px]"></td>
+            <td className="w-[136.1px] h-[19px]">PHP100.00</td>
+          </tr>
+          <tr className="text-[10px] text-center">
+            <td className="w-[113.38px] h-[19px]"></td>
+            <td className="w-[117.16px] h-[19px]"></td>
+            <td className={`w-[249.45px] h-[19px]`}></td>
+            <td className="w-[162.52px] h-[19px]"></td>
+            <td className="w-[136.1px] h-[19px]">PHP10,000.00</td>
+          </tr>
+        </table>
+      </div>
+      <div className="mx-[52.9px] h-[109.6px] border">
         <table className="border-collapse w-full">
           <tbody>
             <tr className="text-[10px]">
-              <td className="h-[22.7px] w-[196.5px]"></td>
-              <td className="h-[22.7px] w-[124.7px]"></td>
-              <td className="h-[22.7px] w-[90.7px]">PHP0.00</td>
-              <td className="h-[22.7px] w-[170px]"></td>
-              <td className="h-[22.7px] w-[109.6px] text-center">
+              <td className="h-[19px] w-[249.44px]"></td>
+              <td className="h-[19px] w-[105.9px]"></td>
+              <td className="h-[19px] w-[90.7px]">PHP0.00</td>
+              <td className="h-[19px] w-[162.52px]"></td>
+              <td className="h-[19px] w-[136.1px] text-center">
                 PHP142,857.14
               </td>
             </tr>
             <tr className="text-[10px]">
-              <td className="h-[22.7px] w-[196.5px]"></td>
-              <td className="h-[22.7px] w-[124.7px]"></td>
-              <td className="h-[22.7px] w-[90.7px]">PHP0.00</td>
-              <td className="h-[22.7px] w-[170px]"></td>
-              <td className="h-[22.7px] w-[109.6px] text-center">
+              <td className="h-[19px] w-[249.44px]"></td>
+              <td className="h-[19px] w-[105.9px]"></td>
+              <td className="h-[19px] w-[90.7px]">PHP0.00</td>
+              <td className="h-[19px] w-[162.52px]"></td>
+              <td className="h-[19px] w-[136.1px] text-center">
                 PHP142,857.14
               </td>
             </tr>
             <tr className="text-[10px]">
-              <td className="h-[22.7px] w-[196.5px]"></td>
-              <td className="h-[22.7px] w-[124.7px]"></td>
-              <td className="h-[22.7px] w-[90.7px]">PHP0.00</td>
-              <td className="h-[22.7px] w-[170px]"></td>
-              <td className="h-[22.7px] w-[109.6px] text-center">
+              <td className="h-[19px] w-[249.44px]"></td>
+              <td className="h-[19px] w-[105.9px]"></td>
+              <td className="h-[19px] w-[90.7px]">PHP0.00</td>
+              <td className="h-[19px] w-[162.52px]"></td>
+              <td className="h-[19px] w-[136.1px] text-center">
                 PHP142,857.14
               </td>
             </tr>
             <tr className="text-[10px]">
-              <td className="h-[22.7px] w-[196.5px]"></td>
-              <td className="h-[22.7px] w-[124.7px]"></td>
-              <td className="h-[22.7px] w-[90.7px]">PHP0.00</td>
-              <td className="h-[22.7px] w-[170px]"></td>
-              <td className="h-[22.7px] w-[109.6px] text-center">
+              <td className="h-[19px] w-[249.44px]"></td>
+              <td className="h-[19px] w-[105.9px]"></td>
+              <td className="h-[19px] w-[90.7px]">PHP0.00</td>
+              <td className="h-[19px] w-[162.52px]"></td>
+              <td className="h-[19px] w-[136.1px] text-center">
                 PHP142,857.14
               </td>
             </tr>
             <tr className="text-[10px]">
-              <td className="h-[22.7px]" colSpan={4}></td>
-              <td className="h-[22.7px] w-[109.6px] text-center">
+              <td className="h-[19px]" colSpan={4}></td>
+              <td className="h-[19px] w-[136.1px] text-center">
                 PHP426,857.14
               </td>
             </tr>
