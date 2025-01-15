@@ -15,13 +15,17 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
     if (!isAuthenticated) {
       router.push("/login");
     } else if (isAuthenticated) {
-      setIsLoading(false);
+      setTimeout(() => setIsLoading(false), 3000);
       router.push("/dashboard");
     }
   }, [isAuthenticated, router]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-screen justify-center items-center flex">
+        <span className="loader"></span>
+      </div>
+    );
   }
 
   return (

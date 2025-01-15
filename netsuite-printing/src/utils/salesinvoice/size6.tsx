@@ -24,161 +24,126 @@ const Size6Sales: React.FC<PrintPageProps> = ({ data }) => {
   const transactionTotal = 19;
 
   return (
-    <div className="text-xs h-[767.245px] w-[604.72px] border">
-      <div className="flex mt-[109.595px]">
-        <p className="w-[400.63px] pl-[83.15px]">
-          Silvestre Lumapas Allan Justine Mascarinas
+    <div className="text-xs h-[718.11px] w-[566.929px] border">
+      <div className="flex mt-[137px]">
+        <p className="w-full text-right pr-[114px]">{data[date]?.[7]}</p>
+      </div>
+      <div className="flex mt-[27px]">
+        <p className="w-full pl-[188.97px] pr-[37.8px]">
+          Mr. Silvestre Lumapas
         </p>
-        <p className="w-[204.09px] pl-[41.57px] h-[20.3px]">{data[date]?.[7]}</p>
       </div>
-      <div className="flex">
-        <p className="w-[400.63px] pl-[83.15px] h-[20.3px]">Tin No data</p>
-        <p className="w-[204.09px] pl-[41.57px]">Terms</p>
+      <div className="flex mt-[10px]">
+        <p className="w-full pl-[188.97px] pr-[37.8px]">1231321564548974432</p>
       </div>
-      <div className="flex h-[32px]">
-        <p className="w-[400.63px] pl-[83.15px]">Address</p>
-        <p className="w-[204.09px] pl-[113.38px]">104</p>
+      <div className="flex mt-[px] h-[29px]">
+        <p className="w-full pl-[188.97px] pr-[37.8px]">
+          JA Clarin Street, Tagbilaran City Bohol 6300 Philippines Country
+        </p>
       </div>
-      <div className="flex">
-        <p className="w-[290px] pl-[109.6px]">Business style</p>
-      </div>
-      <div className="mx-[26.4px] mt-[32px] h-[321.26px] border">
-        <table className="border-collapse w-full">
+      <div className="mx-[30.23px] mt-[25px] h-[211.65px] border">
+        <table className="border-collapse w-full h-auto">
           <tbody>
             {data.slice(1, 11).map((row, index) => (
-              <tr key={index} className="text-[10px] text-center">
-                <td className="w-[68.04px] h-[20px]">{row[10]}</td>
-                <td className="w-[52.914px] h-[20px]">{row[11]}</td>
+              <tr key={index} className="text-xs text-center">
                 <td
-                  className={`w-[234.331px] h-[20px] ${
-                    row[9]?.length > 41 ? "text-[7px]" : ""
+                  className={`w-[253.22px] ${
+                    row[9]?.length > 46 ? "text-[7px]" : ""
                   }`}
                 >
                   {row[9]}
                 </td>
-                <td className="w-[79.371px] h-[20px]">{row[13]}</td>
-                <td className="w-[102.05px] h-[20px]">{row[15]}</td>
+                <td className="w-[71.81px]">{row[10]}</td>
+                <td className="w-[79.37px]">{row[13]}</td>
+                <td className="w-[98.26px]">{row[15]}</td>
               </tr>
             ))}
-            <tr className="text-[10px] text-center">
-              <td className="w-[68.04px] h-[20px]">1</td>
-              <td className="w-[52.914px] h-[20px]">Unit</td>
-              <td className={`w-[234.331px] h-[20px]`}>
-                Avenis UN125NE Pearl Mirage White
-              </td>
-              <td className="w-[68.04px] h-[20px]">1000</td>
-              <td className="w-[102.05px] h-[20px]">1000</td>
+            <tr className="text-xs text-center">
+              <td className="w-[253.22px]">JKASHJKASJKDHB</td>
+              <td className="w-[71.81px]">1</td>
+              <td className="w-[79.37px]">121</td>
+              <td className="w-[98.26px]">2121</td>
             </tr>
-            <tr className="text-[10px] text-center">
-              <td className="w-[68.04px] h-[20px]">1</td>
-              <td className="w-[52.914px] h-[20px]">Unit</td>
-              <td className={`w-[234.331px] h-[20px]`}>
-                Avenis UN125NE Pearl Mirage White
-              </td>
-              <td className="w-[79.371px] h-[20px]">1000</td>
-              <td className="w-[102.05px] h-[20px]">1000</td>
+            <tr className="text-xs text-center">
+              <td className="w-[253.22px]">JKASHJKASJKDHB</td>
+              <td className="w-[71.81px]">1</td>
+              <td className="w-[79.37px]">121</td>
+              <td className="w-[98.26px]">2121</td>
             </tr>
-            <tr className="text-[10px] text-center">
-              <td className="w-[52.914px] h-[20px]">1</td>
-              <td className="w-[52.914px] h-[20px]">Unit</td>
-              <td className={`w-[234.331px] h-[20px]`}>
-                Avenis UN125NE Pearl Mirage White
-              </td>
-              <td className="w-[79.371px] h-[20px]">1000</td>
-              <td className="w-[102.05px] h-[20px]">1000</td>
+            <tr className="text-xs text-center">
+              <td className="w-[253.22px]">JKASHJKASJKDHB</td>
+              <td className="w-[71.81px]">1</td>
+              <td className="w-[79.37px]">121</td>
+              <td className="w-[98.26px]">2121</td>
             </tr>
-            <tr className="text-[10px] text-center">
-              <td className="w-[52.914px] h-[20px]">1</td>
-              <td className="w-[52.914px] h-[20px]">Unit</td>
-              <td className={`w-[234.331px] h-[20px]`}>
-                Avenis UN125NE Pearl Mirage White
-              </td>
-              <td className="w-[79.371px] h-[20px]">1000</td>
-              <td className="w-[102.05px] h-[20px]">1000</td>
-            </tr>
-            <tr className="text-[10px] text-center">
-              <td className="w-[52.914px] h-[20px]">1</td>
-              <td className="w-[52.914px] h-[20px]">Unit</td>
-              <td className={`w-[234.331px] h-[20px]`}>
-                Avenis UN125NE Pearl Mirage White
-              </td>
-              <td className="w-[79.371px] h-[20px]">1000</td>
-              <td className="w-[102.05px] h-[20px]">1000</td>
-            </tr>
-            <tr className="text-[10px] text-center">
-              <td className="w-[52.914px] h-[20px]">1</td>
-              <td className="w-[52.914px] h-[20px]">Unit</td>
-              <td className={`w-[234.331px] h-[20px]`}>
-                Avenis UN125NE Pearl Mirage White
-              </td>
-              <td className="w-[79.371px] h-[20px]">1000</td>
-              <td className="w-[102.05px] h-[20px]">1000</td>
-            </tr>
-            <tr className="text-[10px] text-center">
-              <td className="w-[52.914px] h-[20px]">1</td>
-              <td className="w-[52.914px] h-[20px]">Unit</td>
-              <td className={`w-[234.331px] h-[20px]`}>
-                Avenis UN125NE Pearl Mirage White
-              </td>
-              <td className="w-[79.371px] h-[20px]">1000</td>
-              <td className="w-[102.05px] h-[20px]">1000</td>
-            </tr>
-            <tr className="text-[10px] text-center">
-              <td className="w-[52.914px] h-[20px]">1</td>
-              <td className="w-[52.914px] h-[20px]">Unit</td>
-              <td className={`w-[234.331px] h-[20px]`}>
-                Avenis UN125NE Pearl Mirage White
-              </td>
-              <td className="w-[79.371px] h-[20px]">1000</td>
-              <td className="w-[102.05px] h-[20px]">1000</td>
+            <tr className="text-xs text-center">
+              <td className="w-[253.22px]">JKASHJKASJKDHB</td>
+              <td className="w-[71.81px]">1</td>
+              <td className="w-[79.37px]">121</td>
+              <td className="w-[98.26px]">2121</td>
             </tr>
           </tbody>
-        </table>+
+        </table>
       </div>
-      <div className="mx-[26.4px] h-[139px] -mt-[5px]">
-        <table className="border-collapse w-full">
+      <div className="mx-[30.23px] h-[124.724px] border">
+        <table className="border-collapse w-full text-xs">
           <tbody>
-            <tr className="text-[10px]">
-              <td className="h-[20px] w-[120.954px]"></td>
-              <td className="h-[20px] w-[177.641px]">PHP0.00</td>
-              <td className="h-[20px] w-[136.061px]"></td>
-              <td className="h-[20px] w-[102.05px] text-center">PHP142,857.14</td>
+            <tr>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[102.04px]">PHP0.00</td>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[98.26px]">PHP142,857.14</td>
             </tr>
-            <tr className="text-[10px]">
-              <td className="h-[20px] w-[120.954px]"></td>
-              <td className="h-[20px] w-[177.641px]">PHP0.00</td>
-              <td className="h-[20px] w-[136.061px]"></td>
-              <td className="h-[20px] w-[102.05px] text-center">17,142.86</td>
+            <tr>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[102.04px]">PHP0.00</td>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[98.26px]">17,142.86</td>
             </tr>
-            <tr className="text-[10px]">
-              <td className="h-[20px] w-[120.954px]"></td>
-              <td className="h-[20px] w-[177.641px]">PHP0.00</td>
-              <td className="h-[20px] w-[136.061px]"></td>
-              <td className="h-[20px] w-[102.05px] text-center"></td>
+            <tr>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[102.04px]">PHP0.00</td>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[98.26px]"></td>
             </tr>
-            <tr className="text-[10px]">
-              <td className="h-[20px] w-[120.954px]"></td>
-              <td className="h-[20px] w-[177.641px]">PHP17,142.86</td>
-              <td className="h-[20px] w-[136.061px]"></td>
-              <td className="h-[20px] w-[102.05px] text-center"></td>
+            <tr>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[102.04px]">PHP17,142.86</td>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[98.26px]"></td>
             </tr>
-            <tr className="text-[10px]">
-              <td className="h-[20px] w-[120.954px]"></td>
-              <td className="h-[20px] w-[177.641px]"></td>
-              <td className="h-[20px] w-[136.061px]"></td>
-              <td className="h-[20px] w-[102.05px] text-center">PHP160,000.00</td>
+            <tr>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[102.04px]"></td>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[98.26px]">PHP160,000.00</td>
             </tr>
-            <tr className="text-[10px]">
-              <td className="h-[20px] w-[120.954px]"></td>
-              <td className="h-[20px] w-[177.641px]"></td>
-              <td className="h-[20px] w-[136.061px]"></td>
-              <td className="h-[20px] w-[102.05px] text-center">PHP160,000.00</td>
+            <tr>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[102.04px]"></td>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[98.26px]">PHP160,000.00</td>
             </tr>
-            <tr className="text-[10px]">
-              <td className="h-[20px] w-[120.954px]"></td>
-              <td className="h-[20px] w-[177.641px]"></td>
-              <td className="h-[20px] w-[136.061px]"></td>
-              <td className="h-[20px] w-[102.05px] text-center">PHP160,000.00</td>
+            <tr>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[102.04px]"></td>
+              <td className="w-[151.18px]"></td>
+              <td className="w-[98.26px]">PHP160,000.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="mx-[30.23px] mt-1 border">
+        <table className="border-collapse w-full text-xs">
+          <tbody>
+            <tr className="pt-5">
+              <td className="" rowSpan={2}>
+                <span className="ml-[158.74px]">Test cashier</span>
+              </td>
+              <td className="w-[98.26px]">PHP160,000.00</td>
+            </tr>
+            <tr>
+              <td className="w-[98.26px]">PHP160,000.00</td>
             </tr>
           </tbody>
         </table>

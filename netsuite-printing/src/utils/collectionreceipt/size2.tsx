@@ -35,15 +35,21 @@ const Size2Collection: React.FC<PrintPageProps> = ({ data }) => {
       </div>
       <table className="w-[646px] text-sm">
         <thead>
-          <th className="w-[529px] h-[23px]" />
-          <th className="w-[117px] h-[23px]" />
+          <tr>
+            <th className="w-[529px] h-[23px]" />
+            <th className="w-[117px] h-[23px]" />
+          </tr>
         </thead>
         <tbody>
-          <td className="w-[529px] pl-[92px] text-wrap">
-            data this has to be the data data this has to be the data data this
-            has to be the data data this has to be the data
-          </td>
-          <td className="w-[117px] flex justify-start">{data[1]?.[amount]}</td>
+          <tr>
+            <td className="w-[529px] pl-[92px] text-wrap">
+              data this has to be the data data this has to be the data data
+              this has to be the data data this has to be the data
+            </td>
+            <td className="w-[117px] flex justify-start">
+              {data[1]?.[amount]}
+            </td>
+          </tr>
         </tbody>
       </table>
       <div className="mt-[19px] flex w-[646px]">

@@ -36,24 +36,28 @@ const Size3Collection: React.FC<PrintPageProps> = ({ data }) => {
       <table className="w-[642.5px] text-sm">
         <thead>
           <tr>
-          <th className="w-[529px] h-[23px]"/>
-          <th className="w-[113px] h-[23px]"/>
+            <th className="w-[529px] h-[23px]" />
+            <th className="w-[113px] h-[23px]" />
           </tr>
         </thead>
         <tbody>
-          <td className="w-[529px] pl-[92px] text-wrap">
-            data this has to be the data data this has to be the data data this
-            has to be the data data this has to be the data
-          </td>
-          <td className="w-[113px] flex justify-start">{data[1]?.[amount]}</td>
+          <tr>
+            <td className="w-[529px] pl-[92px] text-wrap">
+              data this has to be the data data this has to be the data data
+              this has to be the data data this has to be the data
+            </td>
+            <td className="w-[113px] flex justify-start">
+              {data[1]?.[amount]}
+            </td>
+          </tr>
         </tbody>
       </table>
       <div className="mt-[19px] flex w-[642.5px]">
-        <p className="w-[529px]"/>
+        <p className="w-[529px]" />
         <p className="w-[113px]">{data[1]?.[amount]}</p>
       </div>
       <div className="flex w-[646px]">
-        <p className="w-[529px]"/>
+        <p className="w-[529px]" />
         <p className="w-[113px] text-xs">{data[1]?.[internalIdColumnIndex]}</p>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 import { PrintPageProps } from "@/types/types";
 
-const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
+const Size9Sales: React.FC<PrintPageProps> = ({ data }) => {
   const internalIdColumnIndex = 0;
   const mainLineName = 1;
   const billingAddress = 2;
@@ -24,7 +24,7 @@ const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
   const transactionTotal = 19;
 
   return (
-    <div className="text-xs h-[718.11px] w-[551.81px]">
+    <div className="text-xs h-[718.11px] w-[566.929px]">
       <div className="flex mt-[137px]">
         <p className="w-full text-right pr-[114px]">{data[date]?.[7]}</p>
       </div>
@@ -45,7 +45,7 @@ const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
         <table className="border-collapse w-full">
           <tbody>
             {data.slice(1, 11).map((row, index) => (
-              <tr key={index} className="text-xs text-center">
+              <tr key={index} className="text-xs text-center text-[10px]">
                 <td
                   className={`w-[253.22px] ${
                     row[9]?.length > 46 ? "text-[7px]" : ""
@@ -58,25 +58,25 @@ const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
                 <td className="w-[98.26px]">{row[15]}</td>
               </tr>
             ))}
-            <tr className="text-xs text-center">
+            <tr className="text-xs text-center text-[10px]">
               <td className="w-[253.22px]">JKASHJKASJKDHB</td>
               <td className="w-[71.81px]">1</td>
               <td className="w-[79.37px]">121</td>
               <td className="w-[98.26px]">2121</td>
             </tr>
-            <tr className="text-xs text-center">
+            <tr className="text-xs text-center text-[10px]">
               <td className="w-[253.22px]">JKASHJKASJKDHB</td>
               <td className="w-[71.81px]">1</td>
               <td className="w-[79.37px]">121</td>
               <td className="w-[98.26px]">2121</td>
             </tr>
-            <tr className="text-xs text-center">
+            <tr className="text-xs text-center text-[10px]">
               <td className="w-[253.22px]">JKASHJKASJKDHB</td>
               <td className="w-[71.81px]">1</td>
               <td className="w-[79.37px]">121</td>
               <td className="w-[98.26px]">2121</td>
             </tr>
-            <tr className="text-xs text-center">
+            <tr className="text-xs text-center text-[10px]">
               <td className="w-[253.22px]">JKASHJKASJKDHB</td>
               <td className="w-[71.81px]">1</td>
               <td className="w-[79.37px]">121</td>
@@ -88,43 +88,43 @@ const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
       <div className="mx-[30.23px] h-[124.72px]">
         <table className="border-collapse w-full text-xs">
           <tbody>
-            <tr>
+            <tr className="text-[10px]">
               <td className="w-[151.18px]"></td>
               <td className="w-[102.04px]">PHP0.00</td>
               <td className="w-[151.18px]"></td>
               <td className="w-[98.26px]">PHP142,857.14</td>
             </tr>
-            <tr>
+            <tr className="text-[10px]">
               <td className="w-[151.18px]"></td>
               <td className="w-[102.04px]">PHP0.00</td>
               <td className="w-[151.18px]"></td>
               <td className="w-[98.26px]">17,142.86</td>
             </tr>
-            <tr>
+            <tr className="text-[10px]">
               <td className="w-[151.18px]"></td>
               <td className="w-[102.04px]">PHP0.00</td>
               <td className="w-[151.18px]"></td>
               <td className="w-[98.26px]"></td>
             </tr>
-            <tr>
+            <tr className="text-[10px]">
               <td className="w-[151.18px]"></td>
               <td className="w-[102.04px]">PHP17,142.86</td>
               <td className="w-[151.18px]"></td>
               <td className="w-[98.26px]"></td>
             </tr>
-            <tr>
+            <tr className="text-[10px]">
               <td className="w-[151.18px]"></td>
               <td className="w-[102.04px]"></td>
               <td className="w-[151.18px]"></td>
               <td className="w-[98.26px]">PHP160,000.00</td>
             </tr>
-            <tr>
+            <tr className="text-[10px]">
               <td className="w-[151.18px]"></td>
               <td className="w-[102.04px]"></td>
               <td className="w-[151.18px]"></td>
               <td className="w-[98.26px]">PHP160,000.00</td>
             </tr>
-            <tr>
+            <tr className="text-[10px]">
               <td className="w-[151.18px]"></td>
               <td className="w-[102.04px]"></td>
               <td className="w-[151.18px]"></td>
@@ -137,4 +137,4 @@ const Size1Sales: React.FC<PrintPageProps> = ({ data }) => {
   );
 };
 
-export default Size1Sales;
+export default Size9Sales;
