@@ -22,131 +22,156 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
   const totalSalesVatExclusive2 = 17;
   const totalSalesVatExclusive3 = 18;
   const vatAmount3 = 19;
-  const totalSalesVatInclusive2 = 19.275590551;
+  const totalSalesVatInclusive2 = 20;
   const serialNumber = 21;
   const chassisNumber = 22;
   const conductionSticker = 23;
   const tinNumber = 24;
   const cashier = 25;
   const unitPrice = 26;
+  const totalAmountDue = 27;
 
   return (
-    <div className="text-[10px] h-[718.11px] w-[566.929px] border">
-      <div className="flex mt-[27px]">
-        <div>
-          <p className="w-full text-[10px]">Mr. Silvestre Lumapas</p>
-          <p className="w-full text-[10px]">1231321564548974432</p>
-          <p className="w-full text-[10px]">
-            JA Clarin Street, Tagbilaran City Bohol 6300 Philippines Country
+    <div className="text-[10px] h-[506.83464567px] w-[741.16535433px] border">
+      <div className="mx-[30.614173228px] w-[684.09448819px] flex space-x-20 mt-[96.377952756px] border">
+        <div className="w-[419.90551181px] pr-[11.716535433px]">
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[110px]">
+            {data[1]?.[mainLineName] || "No Data"}
           </p>
-          <p className="w-full text-[10px]">Business Style</p>
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[110px]">
+            {data[1]?.[tinNumber] || "No Data"}
+          </p>
+          <p className="text-[10px] h-[38.551181102px] ml-[110px] w-fit leading-[19.275590551px]">
+            {data[1]?.[billingAddress] || "No Data"}
+          </p>
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[110px]">
+            {data[1]?.[businessStyle] || "No Data"}
+          </p>
         </div>
-        <div>
-          <p className="w-full text-[10px]">Date</p>
-          <p className="w-full text-[10px]">Terms</p>
-          <p className="w-full text-[10px]">Osca/pwd</p>
+        <div className="w-[264.56692913px]">
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[150px]">
+            {data[1]?.[date] || "No Data"}
+          </p>
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[150px]">
+            {data[1]?.[terms] || "No Data"}
+          </p>
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[150px]">
+            {data[1]?.[oscaPwdIdNo] || "No Data"}
+          </p>
         </div>
       </div>
-      <div className="flex mt-[10px]"></div>
-      <div className="flex mt-[px] h-[29px]"></div>
-      <div className="mx-[27.212598425px] mt-[26.456692913px] h-[313.32283465px] border">
-        <table className="border-collapse w-full">
-          <tbody>
-            {data.slice(1, 11).map((row, index) => (
-              <tr key={index} className="text-[10px] text-center">
-                <td className="w-[71.433070866px]">{row[quantity]}</td>
-                <td className="w-[56.31496063px] h-[19.275590551px]">
-                  {row[unitOfMeasurement]}
-                </td>
-                <td
-                  className={`w-[231.30708661px] h-[19.275590551px] ${
-                    row[articles]?.length > 41 ? "text-[7px]" : ""
-                  }`}
-                >
-                  {row[articles]}
-                </td>
-                <td className="w-[79.37007874px] h-[19.275590551px]">
-                  {row[unitPrice]}
-                </td>
-                <td className="w-[101.66929134px] h-[19.275590551px]">
-                  {row[totalAmount]}
+      <div>
+        <div className="mx-[30.614173228px] w-[684.09448819px] mt-[22.488188976px] h-[91.086614173px] border">
+          <table className="border-collapse w-full">
+            <tbody>
+              {data.slice(1, 6).map((row, index) => (
+                <tr key={index} className="text-[10px] text-center">
+                  <td className="w-[75.212598425px]">{row[quantity]}</td>
+                  <td className="w-[75.968503937px] h-[18.822047244px]">
+                    {row[unitOfMeasurement]}
+                  </td>
+                  <td
+                    className={`w-[242.64566929px] h-[18.822047244px] ${
+                      row[articles]?.length > 41 ? "text-[7px]" : ""
+                    }`}
+                  >
+                    {row[articles]}
+                  </td>
+                  <td className="w-[158.36220472px] h-[18.822047244px]">
+                    {row[unitPrice]}
+                  </td>
+                  <td className="w-[131.90551181px] h-[18.822047244px]">
+                    {row[totalAmount]}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mx-[30.614173228px] w-[684.09448819px] h-[113.461417326px] border">
+          <table className="border-collapse w-full">
+            <tbody>
+              <tr className="text-[10px] text-center">
+                <td className="h-[18.822047244px] w-[165.92125984px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[158.36220472px]"></td>
+                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
+                  {data[1]?.[totalSalesVatInclusive] || "0.00"}
                 </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <div className="mx-[27.212598425px] h-[135.68503937px] border">
-        <table className="border-collapse w-full">
-          <tbody>
-            <tr className="text-[10px]">
-              <td className="h-[19.275590551px] w-[127.7480315px]"></td>
-              <td className="h-[19.275590551px] w-[181.03937008px]">
-                {data[1]?.[vatAmount2] || "0.00"}
-              </td>
-              <td className="h-[19.275590551px] w-[145.51181102px]"></td>
-              <td className="h-[19.275590551px] w-[98.645669291px] text-center">
-                {data[1]?.[totalSalesVatInclusive] || "0.00"}
-              </td>
-            </tr>
-            <tr className="text-[10px]">
-              <td className="h-[19.275590551px] w-[127.7480315px]"></td>
-              <td className="h-[19.275590551px] w-[181.03937008px]">
-                {data[1]?.[vatAmount3] || "0.00"}
-              </td>
-              <td className="h-[19.275590551px] w-[145.51181102px]"></td>
-              <td className="h-[19.275590551px] w-[98.645669291px] text-center">
-                {data[1]?.[totalSalesVatInclusive2] || "0.00"}
-              </td>
-            </tr>
-            <tr className="text-[10px]">
-              <td className="h-[19.275590551px] w-[127.7480315px]"></td>
-              <td className="h-[19.275590551px] w-[181.03937008px]">
-                {data[1]?.[rateInclusiveVat] || "0.00"}
-              </td>
-              <td className="h-[19.275590551px] w-[145.51181102px]"></td>
-              <td className="h-[19.275590551px] w-[98.645669291px] text-center">
-                {data[1]?.[totalSalesVatExclusive] || "0.00"}
-              </td>
-            </tr>
-            <tr className="text-[10px]">
-              <td className="h-[19.275590551px] w-[127.7480315px]"></td>
-              <td className="h-[19.275590551px] w-[181.03937008px]">
-                {data[1]?.[vatAmount] || "0.00"}
-              </td>
-              <td className="h-[19.275590551px] w-[145.51181102px]"></td>
-              <td className="h-[19.275590551px] w-[98.645669291px] text-center"></td>
-            </tr>
-            <tr className="text-[10px]">
-              <td className="h-[19.275590551px] w-[127.7480315px]"></td>
-              <td className="h-[19.275590551px] w-[181.03937008px]"></td>
-              <td className="h-[19.275590551px] w-[145.51181102px]"></td>
-              <td className="h-[19.275590551px] w-[98.645669291px] text-center">
-                {data[1]?.[totalSalesVatExclusive] || "0.00"}
-              </td>
-            </tr>
-            <tr className="text-[10px]">
-              <td className="h-[19.275590551px] w-[127.7480315px]"></td>
-              <td className="h-[19.275590551px] w-[181.03937008px]"></td>
-              <td className="h-[19.275590551px] w-[145.51181102px]"></td>
-              <td className="h-[19.275590551px] w-[98.645669291px] text-center">
-                {data[1]?.[totalSalesVatExclusive2] || "0.00"}
-              </td>
-            </tr>
-            <tr className="text-[10px]">
-              <td className="h-[19.275590551px] w-[127.7480315px]"></td>
-              <td className="h-[19.275590551px] w-[181.03937008px]"></td>
-              <td className="h-[19.275590551px] w-[145.51181102px]"></td>
-              <td className="h-[19.275590551px] w-[98.645669291px] text-center">
-                {data[1]?.[totalSalesVatExclusive3] || "0.00"}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              <tr className="text-[10px] text-center">
+                <td className="h-[18.822047244px] w-[165.92125984px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[158.36220472px]"></td>
+                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
+                  {data[1]?.[totalSalesVatInclusive2] || "0.00"}
+                </td>
+              </tr>
+              <tr className="text-[10px] text-center">
+                <td className="h-[18.822047244px] w-[165.92125984px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]">
+                  {data[1]?.[rateInclusiveVat] || "0.00"}
+                </td>
+                <td className="h-[18.822047244px] w-[158.36220472px]"></td>
+                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
+                  {data[1]?.[totalSalesVatExclusive] || "0.00"}
+                </td>
+              </tr>
+              <tr className="text-[10px] text-center">
+                <td className="h-[18.822047244px] w-[165.92125984px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]">
+                  {data[1]?.[vatAmount] || "0.00"}
+                </td>
+                <td className="h-[18.822047244px] w-[158.36220472px]"></td>
+                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
+                  {data[1]?.[totalSalesVatExclusive2] || "0.00"}
+                </td>
+              </tr>
+              <tr className="text-[10px] text-center">
+                <td className="h-[18.822047244px] w-[165.92125984px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]">
+                  {data[1]?.[vatAmount2] || "0.00"}
+                </td>
+                <td className="h-[18.822047244px] w-[158.36220472px]"></td>
+                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
+                  {data[1]?.[totalSalesVatExclusive] || "0.00"}
+                </td>
+              </tr>
+              <tr className="text-[10px] text-center">
+                <td className="h-[18.822047244px] w-[165.92125984px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]">
+                  {data[1]?.[vatAmount3] || "0.00"}
+                </td>
+                <td className="h-[18.822047244px] w-[158.36220472px]"></td>
+                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
+                  {data[1]?.[totalSalesVatExclusive3] || "0.00"}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="mx-[30.614173228px] w-[684.09448819px] h-[18.822047244px]">
+          <table className="border-collapse w-full">
+            <tbody>
+              <tr className="text-[10px] text-center">
+                <td className="h-[18.822047244px] w-[596.40944881px]"></td>
+                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
+                  {data[1]?.[totalAmountDue] || "0.00"}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div className="mx-[27.212598425px]">
-        <div className="mt-[24.566929134px] ml-[392.31496063px]">
+      <div className="mx-[30.614173228px]">
+        <div className="mt-[15.118110236px] pl-[431.1023622px]">
           <p className="text-[10px] text-center">
             {data[1]?.[cashier] || "0.00"}
           </p>
