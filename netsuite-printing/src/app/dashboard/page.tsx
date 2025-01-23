@@ -2,18 +2,66 @@
 import PrivateRoute from "@/components/privateroutes";
 import { useAuth } from "@/context/authcontext";
 import React, { useEffect, useRef, useState } from "react";
-import { FaPrint } from "react-icons/fa";
+import { FaPrint, FaUpload } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import PrintPage from "../print/page";
 import ReactDOM from "react-dom/client";
+import { FaXmark } from "react-icons/fa6";
+import { FormatFileSize } from "@/utils/SizeFormat/FormatFileSize";
 
 export default function Page() {
   const { user } = useAuth();
-  const [excelData, setExcelData] = useState<any[][]>([]);
+  const [excelData, setExcelData] = useState<any[]>([]);
   const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [fileInfo, setFileInfo] = useState<{ name: string; size: string }>({
+    name: "",
+    size: "",
+  });
+
+  // const internalIdColumnIndex = 0;
+  const mainLineName = 0;
+  const date = 1;
+  const taxNumber = 2;
+  const terms = 3;
+  const billingAddress = 4;
+  const oscaPwdIdNo = 5;
+  const businessStyle = 6;
+  const cardHolderSignatures = 7;
+  const quantity = 8;
+  const unitOfMeasurement = 9;
+  const articles = 10;
+  const rateInclusiveVat = 11;
+  const totalAmount = 12;
+  const totalSalesVatExclusive = 13;
+  const vatAmount = 14;
+  const totalSalesVatInclusive = 15;
+  const vatAmount2 = 16;
+  const totalSalesVatExclusive2 = 17;
+  const totalSalesVatExclusive3 = 18;
+  const vatAmount3 = 19;
+  const totalSalesVatInclusive2 = 20;
+  const serialNumber = 21;
+  const chassisNumber = 22;
+  const conductionSticker = 23;
+  const tinNumber = 24;
+  const cashier = 25;
+  const unitPrice = 26;
+
+  // const billingAddress1 = 2;
+  // const billingAddress2 = 3;
+  // const billingAddress3 = 5;
+  // const item = 9;
+  // const units1 = 12;
+  // const itemRate = 13;
+  // const itemRate1 = 14;
+  // const amount = 15;
+  // const amountTax = 17;
+  // const netTax = 18;
+  // const transactionTotal = 19;
 
   const handlePrint = (componentType: string) => {
     const printWindow = window.open("", "_blank");
@@ -99,9 +147,19 @@ export default function Page() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    const fileName = file.name;
+
+    const fileSize = FormatFileSize(file.size);
+
+    setFileInfo({
+      name: fileName,
+      size: fileSize,
+    });
+
     const reader = new FileReader();
     reader.onload = (event) => {
-      const data = event.target?.result as string;
+      const data = event.target?.result;
+
       const workbook = XLSX.read(data, { type: "binary" });
 
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -110,61 +168,29 @@ export default function Page() {
         header: 1,
       });
 
-      const maxColumns = Math.max(...jsonData.map((row) => row.length));
+      const stringData = jsonData.map((row) =>
+        row.map((cell: any) => {
+          return String(cell);
+        })
+      );
 
-      const formattedData = jsonData.map((row) => {
-        while (row.length < maxColumns) {
-          row.push(null);
-        }
-        return row.map((cell: any, index: number) => {
-          if (index === date && typeof cell === "number" && !isNaN(cell)) {
-            const jsDate = new Date((cell - 25569) * 86400 * 1000);
-            return jsDate.toLocaleDateString("en-US");
-          }
-          const columnsToFormat = [
-            totalSales,
-            amount,
-            transactionTotal,
-            amountTax,
-            netTax,
-          ];
-          if (
-            columnsToFormat.includes(index) &&
-            typeof cell === "number" &&
-            !isNaN(cell)
-          ) {
-            return new Intl.NumberFormat("en-US").format(cell);
-          }
-          return cell;
-        });
-      });
-
-      setExcelData(formattedData);
+      setExcelData(stringData);
     };
+
     setIsFileUploaded(true);
     reader.readAsBinaryString(file);
   };
 
-  const internalIdColumnIndex = 0;
-  const mainLineName = 1;
-  const billingAddress = 2;
-  const billingAddress1 = 3;
-  const billingAddress2 = 4;
-  const billingAddress3 = 5;
-  const taxNumber = 6;
-  const date = 7;
-  const terms = 8;
-  const item = 9;
-  const quantity = 10;
-  const units = 11;
-  const units1 = 12;
-  const itemRate = 13;
-  const itemRate1 = 14;
-  const amount = 15;
-  const totalSales = 16;
-  const amountTax = 17;
-  const netTax = 18;
-  const transactionTotal = 19;
+  const handleRemoveFile = () => {
+    setExcelData([]);
+    setFileInfo({ name: "", size: "" });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+    setIsFileUploaded(false);
+  };
+
+  console.log(excelData);
 
   return (
     <PrivateRoute>
@@ -176,14 +202,47 @@ export default function Page() {
       </div>
       <div className="mt-5 px-5">
         <div className="border border-[#005483] pl-5 py-5">
-          <p className="mb-2 text-xl">
-            {isFileUploaded ? "Imported Data" : "Import Data"}
+          <p className="mb-2 text-xl font-bold">
+            {excelData.length > 0 ? "Preview Data" : "Import Data"}
           </p>
-          <input
-            type="file"
-            accept=".xlsx, .xls, .csv"
-            onChange={handleFileUpload}
-          />
+          <div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".xlsx, .xls, .csv"
+              className="hidden"
+              id="fileInput"
+              onChange={handleFileUpload}
+            />
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="p-2 flex gap-2 items-center bg-blue-500/80 text-white hover:bg-blue-600/80 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-md"
+              >
+                <FaUpload size={20} color="#fff" /> Upload File
+              </button>
+              {excelData.length > 0 && (
+                <button
+                  type="button"
+                  onClick={handleRemoveFile}
+                  className="p-2 flex gap-2 items-center bg-red-500/80 text-white hover:bg-red-600/80 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-md"
+                >
+                  <FaXmark size={20} color="#fff" /> Remove
+                </button>
+              )}
+            </div>
+            {fileInfo.name && (
+              <div className="mt-2">
+                <p>
+                  <strong>File Name:</strong> {fileInfo.name}
+                </p>
+                <p>
+                  <strong>File Size:</strong> {fileInfo.size}
+                </p>
+              </div>
+            )}
+          </div>
         </div>
         <div
           className={`w-full flex justify-end pr-5 ${
@@ -223,93 +282,13 @@ export default function Page() {
             ""
           )}
         </div>
-        {/* {excelData.length > 0 && (
-          <table
-            className="border mt-3 text-sm"
-            cellPadding="5"
-            cellSpacing="0"
-          >
-            <thead>
-              <tr className="bg-[#607799]">
-                {excelData[0]?.map((header: string | null, index: number) => (
-                  <th
-                    key={index}
-                    className="border-transparent p-1 text-center text-white"
-                  >
-                    {header || "Empty Column"}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {excelData.slice(1).map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  <td className="border p-1 text-center">
-                    {row[internalIdColumnIndex] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[mainLineName] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[billingAddress] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[billingAddress1] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[billingAddress2] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[billingAddress3] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[taxNumber] || ""}
-                  </td>
-                  <td className="border p-1 text-center">{row[date] || ""}</td>
-                  <td className="border p-1 text-center">{row[terms] || ""}</td>
-                  <td className="border p-1 text-center">{row[item] || ""}</td>
-                  <td className="border p-1 text-center">
-                    {row[quantity] || ""}
-                  </td>
-                  <td className="border p-1 text-center">{row[units] || ""}</td>
-                  <td className="border p-1 text-center">
-                    {row[units1] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[itemRate] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[itemRate1] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[amount] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[totalSales] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[amountTax] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[netTax] || ""}
-                  </td>
-                  <td className="border p-1 text-center">
-                    {row[transactionTotal] || ""}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )} */}
         {excelData.slice(1).map((row, rowIndex) => (
           <div key={rowIndex}>
             <div className="my-5 flex justify-between text-sm text-[#333] px-10">
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
-                  <p>Internal ID</p>
-                  <p className="font-semibold">
-                    {row[internalIdColumnIndex] || "N/A"}
-                  </p>
+                  <p>Chassis Number</p>
+                  <p className="font-semibold">{row[chassisNumber] || "N/A"}</p>
                 </div>
                 <div className="flex flex-col">
                   <p>Mainline Name</p>
@@ -320,6 +299,14 @@ export default function Page() {
                   <p className="font-semibold">
                     {row[billingAddress] || "N/A"}
                   </p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Tin Number</p>
+                  <p className="font-semibold">{row[tinNumber] || "N/A"}</p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Cashier</p>
+                  <p className="font-semibold">{row[cashier] || "N/A"}</p>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
@@ -335,65 +322,53 @@ export default function Page() {
                   <p>Terms</p>
                   <p className="font-semibold">{row[terms] || "N/A"}</p>
                 </div>
+                <div className="flex flex-col">
+                  <p>Serial Number</p>
+                  <p className="font-semibold">{row[serialNumber] || "N/A"}</p>
+                </div>
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
-                  <p>Item</p>
-                  <p className="font-semibold">{row[item] || "N/A"}</p>
+                  <p>Articles</p>
+                  <p className="font-semibold">{row[articles] || "N/A"}</p>
                 </div>
                 <div className="flex flex-col">
                   <p>Quantity</p>
                   <p className="font-semibold">{row[quantity] || "N/A"}</p>
                 </div>
                 <div className="flex flex-col">
-                  <p>Units</p>
-                  <p className="font-semibold">{row[units] || "N/A"}</p>
+                  <p>Unit of Measurement</p>
+                  <p className="font-semibold">
+                    {row[unitOfMeasurement] || "N/A"}
+                  </p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Conduction Sticker</p>
+                  <p className="font-semibold">
+                    {row[conductionSticker] || "N/A"}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col">
-                  <p>Units</p>
-                  <p className="font-semibold">{row[units1] || "N/A"}</p>
+                  <p>OSCA/PWD ID No.</p>
+                  <p className="font-semibold">{row[oscaPwdIdNo] || "N/A"}</p>
                 </div>
                 <div className="flex flex-col">
-                  <p>Item Rate</p>
-                  <p className="font-semibold">{row[itemRate] || "N/A"}</p>
+                  <p>Business Style</p>
+                  <p className="font-semibold">{row[businessStyle] || "N/A"}</p>
                 </div>
                 <div className="flex flex-col">
-                  <p>Item Rate</p>
-                  <p className="font-semibold">{row[itemRate1] || "N/A"}</p>
+                  <p>Cardholder's Signature</p>
+                  <p className="font-semibold">
+                    {row[cardHolderSignatures] || "N/A"}
+                  </p>
+                </div>
+                <div className="flex flex-col">
+                  <p>Unit Price</p>
+                  <p className="font-semibold">{row[unitPrice] || "N/A"}</p>
                 </div>
               </div>
-              {/* <div className="flex flex-col gap-2">
-            <div className="flex flex-col">
-              <p>Amount</p>
-              <p className="font-semibold">{excelData[2]?.[amount] || "N/A"}</p>
-            </div>
-            <div className="flex flex-col">
-              <p>Total Sales (VAT Inclusive)</p>
-              <p className="font-semibold">
-                {excelData[2]?.[totalSales] || "N/A"}
-              </p>
-            </div>
-            <div className="flex flex-col">
-              <p>Amount (Tax)</p>
-              <p className="font-semibold">
-                {excelData[2]?.[amountTax] || "N/A"}
-              </p>
-            </div>
-          </div> */}
-              {/* <div className="flex flex-col gap-2">
-            <div className="flex flex-col">
-              <p>Amount (Net of Tax)</p>
-              <p className="font-semibold">{excelData[2]?.[netTax] || "N/A"}</p>
-            </div>
-            <div className="flex flex-col">
-              <p>Amount (Transaction Total)</p>
-              <p className="font-semibold">
-                {excelData[2]?.[transactionTotal] || "N/A"}
-              </p>
-            </div>
-          </div> */}
               <div>
                 <table>
                   <thead>
@@ -405,9 +380,9 @@ export default function Page() {
                   </thead>
                   <tbody className="bg-[#f1f1f1]">
                     <tr>
-                      <td className="text-left p-2">Amount</td>
+                      <td className="text-left p-2">Total Amount</td>
                       <td className="text-right p-2 font-semibold">
-                        {row[amount] || "N/A"}
+                        {row[totalAmount] || "N/A"}
                       </td>
                     </tr>
                     <tr>
@@ -415,19 +390,19 @@ export default function Page() {
                         Total Sales (VAT Inclusive)
                       </td>
                       <td className="text-right p-2 font-semibold">
-                        {row[totalSales] || "N/A"}
+                        {row[totalSalesVatInclusive] || "N/A"}
                       </td>
                     </tr>
                     <tr>
                       <td className="text-left p-2">Amount (Tax)</td>
                       <td className="text-right p-2 font-semibold">
-                        {row[amountTax] || "N/A"}
+                        {row[vatAmount] || "N/A"}
                       </td>
                     </tr>
                     <tr>
                       <td className="text-left p-2">Amount (Net of Tax)</td>
                       <td className="text-right p-2 font-semibold">
-                        {row[netTax] || "N/A"}
+                        {row[vatAmount2] || "N/A"}
                       </td>
                     </tr>
                     <tr>
@@ -435,7 +410,7 @@ export default function Page() {
                         Amount (Transaction Total)
                       </td>
                       <td className="text-right p-2 font-semibold">
-                        {row[transactionTotal] || "N/A"}
+                        {row[totalAmount] || "N/A"}
                       </td>
                     </tr>
                   </tbody>

@@ -64,20 +64,22 @@ const Size4Sales: React.FC<PrintPageProps> = ({ data }) => {
       </div>
       <div className="mx-[52.9px] border">
         <table className="border-collapse w-full">
-          <tr className="text-[10px] text-center">
-            <td className="w-[113.38px] h-[19px]"></td>
-            <td className="w-[117.16px] h-[19px]"></td>
-            <td className={`w-[249.45px] h-[19px]`}></td>
-            <td className="w-[162.52px] h-[19px]"></td>
-            <td className="w-[136.1px] h-[19px]">PHP100.00</td>
-          </tr>
-          <tr className="text-[10px] text-center">
-            <td className="w-[113.38px] h-[19px]"></td>
-            <td className="w-[117.16px] h-[19px]"></td>
-            <td className={`w-[249.45px] h-[19px]`}></td>
-            <td className="w-[162.52px] h-[19px]"></td>
-            <td className="w-[136.1px] h-[19px]">PHP10,000.00</td>
-          </tr>
+          <tbody>
+            <tr className="text-[10px] text-center">
+              <td className="w-[113.38px] h-[19px]"></td>
+              <td className="w-[117.16px] h-[19px]"></td>
+              <td className={`w-[249.45px] h-[19px]`}></td>
+              <td className="w-[162.52px] h-[19px]"></td>
+              <td className="w-[136.1px] h-[19px]">PHP100.00</td>
+            </tr>
+            <tr className="text-[10px] text-center">
+              <td className="w-[113.38px] h-[19px]"></td>
+              <td className="w-[117.16px] h-[19px]"></td>
+              <td className={`w-[249.45px] h-[19px]`}></td>
+              <td className="w-[162.52px] h-[19px]"></td>
+              <td className="w-[136.1px] h-[19px]">PHP10,000.00</td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div className="mx-[52.9px] h-[109.6px] border">
