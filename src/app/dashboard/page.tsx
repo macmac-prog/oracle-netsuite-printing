@@ -8,6 +8,8 @@ import PrintPage from "../print/page";
 import ReactDOM from "react-dom/client";
 import { FaXmark } from "react-icons/fa6";
 import { FormatFileSize } from "@/utils/SizeFormat/FormatFileSize";
+import DragAndDropComponent from "@/components/DragAndDropComponent";
+import FormattedNumber from "@/utils/FormattedNumber";
 
 export default function Page() {
   const { user } = useAuth();
@@ -190,8 +192,6 @@ export default function Page() {
     setIsFileUploaded(false);
   };
 
-  console.log(excelData);
-
   return (
     <PrivateRoute>
       <div className="mt-5 pl-5">
@@ -249,7 +249,7 @@ export default function Page() {
             isFileUploaded ? "py-2" : "py-4"
           } my-5 bg-[#dfe4eb]`}
         >
-          {isFileUploaded ? (
+          {isFileUploaded && (
             <>
               <div>
                 <button
@@ -278,148 +278,170 @@ export default function Page() {
                 </div>
               )}
             </>
-          ) : (
-            ""
           )}
         </div>
-        {excelData.slice(1).map((row, rowIndex) => (
-          <div key={rowIndex}>
-            <div className="my-5 flex justify-between text-sm text-[#333] px-10">
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-col">
-                  <p>Chassis Number</p>
-                  <p className="font-semibold">{row[chassisNumber] || "N/A"}</p>
+        {excelData && excelData.length > 0 ? (
+          excelData.slice(1).map((row, rowIndex) => (
+            <div key={rowIndex}>
+              <div className="my-5 flex justify-between text-sm text-[#333] px-10">
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col">
+                    <p>Chassis Number</p>
+                    <p className="font-semibold">
+                      {row[chassisNumber] || "N/A"}
+                    </p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Mainline Name</p>
+                    <p className="font-semibold">
+                      {row[mainLineName] || "N/A"}
+                    </p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Billing Address</p>
+                    <p className="font-semibold">
+                      {row[billingAddress] || "N/A"}
+                    </p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Tin Number</p>
+                    <p className="font-semibold">{row[tinNumber] || "N/A"}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Cashier</p>
+                    <p className="font-semibold">{row[cashier] || "N/A"}</p>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <p>Mainline Name</p>
-                  <p className="font-semibold">{row[mainLineName] || "N/A"}</p>
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col">
+                    <p>Tax Number</p>
+                    <p className="font-semibold">{row[taxNumber] || "N/A"}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Date</p>
+                    <p className="font-semibold">{row[date] || "N/A"}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Terms</p>
+                    <p className="font-semibold">{row[terms] || "N/A"}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Serial Number</p>
+                    <p className="font-semibold">
+                      {row[serialNumber] || "N/A"}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <p>Billing Address</p>
-                  <p className="font-semibold">
-                    {row[billingAddress] || "N/A"}
-                  </p>
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col">
+                    <p>Articles</p>
+                    <p className="font-semibold">{row[articles] || "N/A"}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Quantity</p>
+                    <p className="font-semibold">{row[quantity] || "N/A"}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Unit of Measurement</p>
+                    <p className="font-semibold">
+                      {row[unitOfMeasurement] || "N/A"}
+                    </p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Conduction Sticker</p>
+                    <p className="font-semibold">
+                      {row[conductionSticker] || "N/A"}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <p>Tin Number</p>
-                  <p className="font-semibold">{row[tinNumber] || "N/A"}</p>
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col">
+                    <p>OSCA/PWD ID No.</p>
+                    <p className="font-semibold">{row[oscaPwdIdNo] || "N/A"}</p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Business Style</p>
+                    <p className="font-semibold">
+                      {row[businessStyle] || "N/A"}
+                    </p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Cardholder's Signature</p>
+                    <p className="font-semibold">
+                      {row[cardHolderSignatures] || "N/A"}
+                    </p>
+                  </div>
+                  <div className="flex flex-col">
+                    <p>Unit Price</p>
+                    <p className="font-semibold">
+                      {FormattedNumber(row[totalAmount]) || "0.00"}
+                    </p>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <p>Cashier</p>
-                  <p className="font-semibold">{row[cashier] || "N/A"}</p>
+                <div>
+                  <table>
+                    <thead>
+                      <tr className="bg-[#607799]">
+                        <th colSpan={2} className="text-white p-2 text-left">
+                          SUMMARY
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="bg-[#f1f1f1]">
+                      <tr>
+                        <td className="text-left p-2">
+                          Total Sales (VAT Inclusive)
+                        </td>
+                        <td className="text-right p-2 font-semibold">
+                          {FormattedNumber(row[totalSalesVatInclusive]) ||
+                            "0.00"}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="text-left p-2">Less: VAT</td>
+                        <td className="text-right p-2 font-semibold">
+                          {FormattedNumber(row[vatAmount]) || "0.00"}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="text-left p-2">Amount: Net of VAT</td>
+                        <td className="text-right p-2 font-semibold">
+                          {FormattedNumber(row[totalSalesVatExclusive]) ||
+                            "0.00"}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="text-left p-2">Amount Due</td>
+                        <td className="text-right p-2 font-semibold">
+                          {FormattedNumber(row[totalSalesVatExclusive2]) ||
+                            "0.00"}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="text-left p-2">Add: VAT</td>
+                        <td className="text-right p-2 font-semibold">
+                          {FormattedNumber(row[vatAmount2]) || "0.00"}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="text-left p-2">TOTAL AMOUNT DUE</td>
+                        <td className="text-right p-2 font-semibold">
+                          {FormattedNumber(row[totalSalesVatInclusive2]) ||
+                            "0.00"}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-col">
-                  <p>Tax Number</p>
-                  <p className="font-semibold">{row[taxNumber] || "N/A"}</p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Date</p>
-                  <p className="font-semibold">{row[date] || "N/A"}</p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Terms</p>
-                  <p className="font-semibold">{row[terms] || "N/A"}</p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Serial Number</p>
-                  <p className="font-semibold">{row[serialNumber] || "N/A"}</p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-col">
-                  <p>Articles</p>
-                  <p className="font-semibold">{row[articles] || "N/A"}</p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Quantity</p>
-                  <p className="font-semibold">{row[quantity] || "N/A"}</p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Unit of Measurement</p>
-                  <p className="font-semibold">
-                    {row[unitOfMeasurement] || "N/A"}
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Conduction Sticker</p>
-                  <p className="font-semibold">
-                    {row[conductionSticker] || "N/A"}
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <div className="flex flex-col">
-                  <p>OSCA/PWD ID No.</p>
-                  <p className="font-semibold">{row[oscaPwdIdNo] || "N/A"}</p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Business Style</p>
-                  <p className="font-semibold">{row[businessStyle] || "N/A"}</p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Cardholder's Signature</p>
-                  <p className="font-semibold">
-                    {row[cardHolderSignatures] || "N/A"}
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <p>Unit Price</p>
-                  <p className="font-semibold">{row[unitPrice] || "N/A"}</p>
-                </div>
-              </div>
-              <div>
-                <table>
-                  <thead>
-                    <tr className="bg-[#607799]">
-                      <th colSpan={2} className="text-white p-2 text-left">
-                        SUMMARY
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-[#f1f1f1]">
-                    <tr>
-                      <td className="text-left p-2">Total Amount</td>
-                      <td className="text-right p-2 font-semibold">
-                        {row[totalAmount] || "N/A"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="text-left p-2">
-                        Total Sales (VAT Inclusive)
-                      </td>
-                      <td className="text-right p-2 font-semibold">
-                        {row[totalSalesVatInclusive] || "N/A"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="text-left p-2">Amount (Tax)</td>
-                      <td className="text-right p-2 font-semibold">
-                        {row[vatAmount] || "N/A"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="text-left p-2">Amount (Net of Tax)</td>
-                      <td className="text-right p-2 font-semibold">
-                        {row[vatAmount2] || "N/A"}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="text-left p-2">
-                        Amount (Transaction Total)
-                      </td>
-                      <td className="text-right p-2 font-semibold">
-                        {row[totalAmount] || "N/A"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <div className="w-full flex justify-end pr-5 py-5 my-5 bg-[#dfe4eb]" />
             </div>
-            <div className="w-full flex justify-end pr-5 py-5 my-5 bg-[#dfe4eb]" />
+          ))
+        ) : (
+          <div className="flex justify-center my-5">
+            <DragAndDropComponent />
           </div>
-        ))}
+        )}
       </div>
     </PrivateRoute>
   );

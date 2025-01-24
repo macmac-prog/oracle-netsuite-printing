@@ -1,5 +1,7 @@
 "use client";
 import { PrintPageProps } from "@/types/types";
+import FormattedNumber from "../FormattedNumber";
+import FormattedSumTotal from "../FormattedSumTotal";
 
 const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
   const mainLineName = 0;
@@ -78,10 +80,10 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
                     {row[articles]}
                   </td>
                   <td className="w-[158.36220472px] h-[18.822047244px]">
-                    {row[unitPrice]}
+                    {FormattedNumber(row[totalAmount]) || "0.00"}
                   </td>
                   <td className="w-[131.90551181px] h-[18.822047244px]">
-                    {row[totalAmount]}
+                    {FormattedNumber(row[totalAmount]) || "0.00"}
                   </td>
                 </tr>
               ))}
@@ -97,7 +99,7 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
                 <td className="h-[18.822047244px] w-[117.16535433px]"></td>
                 <td className="h-[18.822047244px] w-[158.36220472px]"></td>
                 <td className="h-[18.822047244px] w-[131.90551181px] text-center">
-                  {data[1]?.[totalSalesVatInclusive] || "0.00"}
+                  {FormattedSumTotal(data, totalSalesVatInclusive, 5) || "0.00"}
                 </td>
               </tr>
               <tr className="text-[10px] text-center">
@@ -106,51 +108,52 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
                 <td className="h-[18.822047244px] w-[117.16535433px]"></td>
                 <td className="h-[18.822047244px] w-[158.36220472px]"></td>
                 <td className="h-[18.822047244px] w-[131.90551181px] text-center">
-                  {data[1]?.[totalSalesVatInclusive2] || "0.00"}
-                </td>
-              </tr>
-              <tr className="text-[10px] text-center">
-                <td className="h-[18.822047244px] w-[165.92125984px]"></td>
-                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
-                <td className="h-[18.822047244px] w-[117.16535433px]">
-                  {data[1]?.[rateInclusiveVat] || "0.00"}
-                </td>
-                <td className="h-[18.822047244px] w-[158.36220472px]"></td>
-                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
-                  {data[1]?.[totalSalesVatExclusive] || "0.00"}
+                  {FormattedSumTotal(data, vatAmount, 5) || "0.00"}
                 </td>
               </tr>
               <tr className="text-[10px] text-center">
                 <td className="h-[18.822047244px] w-[165.92125984px]"></td>
                 <td className="h-[18.822047244px] w-[117.16535433px]"></td>
                 <td className="h-[18.822047244px] w-[117.16535433px]">
-                  {data[1]?.[vatAmount] || "0.00"}
+                  {/* {data[1]?.[vatAmount] || "0.00"} */}
                 </td>
                 <td className="h-[18.822047244px] w-[158.36220472px]"></td>
                 <td className="h-[18.822047244px] w-[131.90551181px] text-center">
-                  {data[1]?.[totalSalesVatExclusive2] || "0.00"}
+                  {FormattedSumTotal(data, totalSalesVatExclusive, 5) || "0.00"}
                 </td>
               </tr>
               <tr className="text-[10px] text-center">
                 <td className="h-[18.822047244px] w-[165.92125984px]"></td>
                 <td className="h-[18.822047244px] w-[117.16535433px]"></td>
                 <td className="h-[18.822047244px] w-[117.16535433px]">
-                  {data[1]?.[vatAmount2] || "0.00"}
+                  {/* {data[1]?.[vatAmount] || "0.00"} */}
                 </td>
                 <td className="h-[18.822047244px] w-[158.36220472px]"></td>
                 <td className="h-[18.822047244px] w-[131.90551181px] text-center">
-                  {data[1]?.[totalSalesVatExclusive] || "0.00"}
+                  {/* {data[1]?.[totalSalesVatInclusive2] || "0.00"} */}
                 </td>
               </tr>
               <tr className="text-[10px] text-center">
                 <td className="h-[18.822047244px] w-[165.92125984px]"></td>
                 <td className="h-[18.822047244px] w-[117.16535433px]"></td>
                 <td className="h-[18.822047244px] w-[117.16535433px]">
-                  {data[1]?.[vatAmount3] || "0.00"}
+                  {/* {data[1]?.[vatAmount2] || "0.00"} */}
                 </td>
                 <td className="h-[18.822047244px] w-[158.36220472px]"></td>
                 <td className="h-[18.822047244px] w-[131.90551181px] text-center">
-                  {data[1]?.[totalSalesVatExclusive3] || "0.00"}
+                  {FormattedSumTotal(data, totalSalesVatExclusive2, 5) ||
+                    "0.00"}
+                </td>
+              </tr>
+              <tr className="text-[10px] text-center">
+                <td className="h-[18.822047244px] w-[165.92125984px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]"></td>
+                <td className="h-[18.822047244px] w-[117.16535433px]">
+                  {/* {data[1]?.[vatAmount2] || "0.00"} */}
+                </td>
+                <td className="h-[18.822047244px] w-[158.36220472px]"></td>
+                <td className="h-[18.822047244px] w-[131.90551181px] text-center">
+                  {FormattedSumTotal(data, vatAmount2, 5) || "0.00"}
                 </td>
               </tr>
             </tbody>
@@ -160,9 +163,10 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
           <table className="border-collapse w-full">
             <tbody>
               <tr className="text-[10px] text-center">
-                <td className="h-[18.822047244px] w-[596.40944881px]"></td>
+                <td className="h-[18.822047244px] w-[560.40944881px]"></td>
                 <td className="h-[18.822047244px] w-[131.90551181px] text-center">
-                  {data[1]?.[totalAmountDue] || "0.00"}
+                  {FormattedSumTotal(data, totalSalesVatInclusive, 5) ||
+                    "0.00"}
                 </td>
               </tr>
             </tbody>
@@ -172,9 +176,7 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
 
       <div className="mx-[30.614173228px]">
         <div className="mt-[15.118110236px] pl-[431.1023622px]">
-          <p className="text-[10px] text-center">
-            {data[1]?.[cashier] || "0.00"}
-          </p>
+          <p className="text-[10px] text-center">{data[1]?.[cashier] || ""}</p>
         </div>
       </div>
     </div>
