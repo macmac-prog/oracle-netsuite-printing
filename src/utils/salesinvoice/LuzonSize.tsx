@@ -35,35 +35,35 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
 
   return (
     <div className="text-[10px] h-[506.83464567px] w-[741.16535433px]">
-      <div className="mx-[30.614173228px] w-[684.09448819px] flex space-x-20 mt-[96.377952756px]">
+      <div className="mx-[30.614173228px] w-[684.09448819px] flex space-x-20 mt-[100px]">
         <div className="w-[419.90551181px] pr-[11.716535433px]">
-          <p className="w-full text-[10px] h-[19.275590551px] ml-[110px]">
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[120px]">
             {data[1]?.[mainLineName] || "No Data"}
           </p>
-          <p className="w-full text-[10px] h-[19.275590551px] ml-[110px]">
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[120px]">
             {data[1]?.[tinNumber] || "No Data"}
           </p>
-          <p className="text-[10px] h-[38.551181102px] ml-[110px] w-fit leading-[19.275590551px]">
+          <p className="text-[10px] h-[38.551181102px] ml-[120px] w-fit leading-[19.275590551px]">
             {data[1]?.[billingAddress] || "No Data"}
           </p>
-          <p className="w-full text-[10px] h-[19.275590551px] ml-[110px]">
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[120px]">
             {data[1]?.[businessStyle] || "No Data"}
           </p>
         </div>
         <div className="w-[264.56692913px]">
-          <p className="w-full text-[10px] h-[19.275590551px] ml-[150px]">
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[160px]">
             {data[1]?.[date] || "No Data"}
           </p>
-          <p className="w-full text-[10px] h-[19.275590551px] ml-[150px]">
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[160px]">
             {data[1]?.[terms] || "No Data"}
           </p>
-          <p className="w-full text-[10px] h-[19.275590551px] ml-[150px]">
+          <p className="w-full text-[10px] h-[19.275590551px] ml-[160px]">
             {data[1]?.[oscaPwdIdNo] || "No Data"}
           </p>
         </div>
       </div>
-      <div className="ml-[30px]">
-        <div className="mx-[30.614173228px] w-[684.09448819px] mt-[22.488188976px] h-[91.086614173px]">
+      <div className="mx-[30.614173228px]">
+        <div className="mt-[22.488188976px] w-[741.16535433px] h-[91.086614173px]">
           <table className="border-collapse w-full">
             <tbody>
               {data.slice(1, 6).map((row, index) => (
@@ -90,7 +90,7 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
             </tbody>
           </table>
         </div>
-        <div className="mx-[30.614173228px] w-[684.09448819px] h-[113.461417326px]">
+        <div className="h-[113.461417326px] w-[741.16535433px] mt-[7px]">
           <table className="border-collapse w-full">
             <tbody>
               <tr className="text-[10px] text-center">
@@ -159,7 +159,7 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
             </tbody>
           </table>
         </div>
-        <div className="mx-[30.614173228px] w-[684.09448819px] h-[18.822047244px]">
+        <div className="h-[18.822047244px] w-[741.16535433px]">
           <table className="border-collapse w-full">
             <tbody>
               <tr className="text-[10px] text-center">
@@ -174,8 +174,8 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
         </div>
       </div>
 
-      <div className="mx-[30.614173228px]">
-        <div className="mt-[15.118110236px] pl-[431.1023622px]">
+      <div>
+        <div className="mt-[19px] pl-[431.1023622px]">
           <p className="text-[10px] text-center">{data[1]?.[cashier] || ""}</p>
         </div>
       </div>

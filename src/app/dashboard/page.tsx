@@ -10,6 +10,7 @@ import { FaXmark } from "react-icons/fa6";
 import { FormatFileSize } from "@/utils/SizeFormat/FormatFileSize";
 import DragAndDropComponent from "@/components/DragAndDropComponent";
 import FormattedNumber from "@/utils/FormattedNumber";
+import FormattedSumTotal from "@/utils/FormattedSumTotal";
 
 export default function Page() {
   const { user } = useAuth();
@@ -96,7 +97,6 @@ export default function Page() {
       printDocument.close();
 
       printWindow.onload = () => {
-        console.log("Print window loaded");
         const rootElement = printWindow.document.getElementById("root");
         if (rootElement) {
           const reactRoot = ReactDOM.createRoot(rootElement);
@@ -145,7 +145,7 @@ export default function Page() {
     };
   }, []);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: any) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -192,6 +192,8 @@ export default function Page() {
     setIsFileUploaded(false);
   };
 
+  const handleUploadFile = () => fileInputRef.current?.click();
+
   return (
     <PrivateRoute>
       <div className="mt-5 pl-5">
@@ -217,7 +219,7 @@ export default function Page() {
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={() => fileInputRef.current?.click()}
+                onClick={handleUploadFile}
                 className="p-2 flex gap-2 items-center bg-blue-500/80 text-white hover:bg-blue-600/80 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-md"
               >
                 <FaUpload size={20} color="#fff" /> Upload File
@@ -426,7 +428,7 @@ export default function Page() {
                       <tr>
                         <td className="text-left p-2">TOTAL AMOUNT DUE</td>
                         <td className="text-right p-2 font-semibold">
-                          {FormattedNumber(row[totalSalesVatInclusive2]) ||
+                          {FormattedNumber(row[totalSalesVatInclusive]) ||
                             "0.00"}
                         </td>
                       </tr>
@@ -439,7 +441,12 @@ export default function Page() {
           ))
         ) : (
           <div className="flex justify-center my-5">
-            <DragAndDropComponent />
+            <DragAndDropComponent
+              setFileInfo={setFileInfo}
+              setExcelData={setExcelData}
+              setIsFileUploaded={setIsFileUploaded}
+              handleUploadFile={handleUploadFile}
+            />
           </div>
         )}
       </div>
