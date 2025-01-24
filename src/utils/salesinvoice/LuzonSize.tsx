@@ -32,8 +32,8 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
   const totalAmountDue = 27;
 
   return (
-    <div className="text-[10px] h-[506.83464567px] w-[741.16535433px] border">
-      <div className="mx-[30.614173228px] w-[684.09448819px] flex space-x-20 mt-[96.377952756px] border">
+    <div className="text-[10px] h-[506.83464567px] w-[741.16535433px]">
+      <div className="mx-[30.614173228px] w-[684.09448819px] flex space-x-20 mt-[96.377952756px]">
         <div className="w-[419.90551181px] pr-[11.716535433px]">
           <p className="w-full text-[10px] h-[19.275590551px] ml-[110px]">
             {data[1]?.[mainLineName] || "No Data"}
@@ -60,8 +60,8 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
           </p>
         </div>
       </div>
-      <div>
-        <div className="mx-[30.614173228px] w-[684.09448819px] mt-[22.488188976px] h-[91.086614173px] border">
+      <div className="ml-[30px]">
+        <div className="mx-[30.614173228px] w-[684.09448819px] mt-[22.488188976px] h-[91.086614173px]">
           <table className="border-collapse w-full">
             <tbody>
               {data.slice(1, 6).map((row, index) => (
@@ -88,7 +88,7 @@ const LuzonSize: React.FC<PrintPageProps> = ({ data }) => {
             </tbody>
           </table>
         </div>
-        <div className="mx-[30.614173228px] w-[684.09448819px] h-[113.461417326px] border">
+        <div className="mx-[30.614173228px] w-[684.09448819px] h-[113.461417326px]">
           <table className="border-collapse w-full">
             <tbody>
               <tr className="text-[10px] text-center">
