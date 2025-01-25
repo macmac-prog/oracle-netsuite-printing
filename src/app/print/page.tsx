@@ -2,11 +2,8 @@
 import CashSalesInvoice from "@/constants/CashSalesInvoice";
 import CollectionReceipt from "@/constants/CollectionReceipt";
 import { AuthProvider } from "@/context/authcontext";
-import { PrintPageProps } from "@/types/types";
 
-
-
-const PrintPage: React.FC<PrintPageProps> = ({ data, componentType }) => {
+const PrintPage = ({ data, componentType }: any) => {
 
     const renderReceiptComponent = () => {
         switch (componentType) {
