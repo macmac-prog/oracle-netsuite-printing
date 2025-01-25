@@ -13,16 +13,11 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
-
 # Copy the remaining application files to the working directory
 COPY . .
 
-# Build the application
 RUN pnpm run build
-
-# Install a simple HTTP server to serve static files
-RUN npm install -g serve
 
 EXPOSE 1000
 
-CMD ["serve", "-s", ".next", "-l", "1000"]
+CMD ["pnpm", "start", "-p", "1000"]
