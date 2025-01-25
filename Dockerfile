@@ -25,4 +25,4 @@ RUN npm install -g serve
 
 EXPOSE 1000
 
-CMD ["serve", "-s", "build", "-l", "1000"]
+CMD ["serve", "-s", ".next", "-l", "1000"]
