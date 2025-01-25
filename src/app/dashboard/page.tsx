@@ -304,7 +304,7 @@ export default function Page() {
           )}
         </div>
         {isLoading ? (
-          <div className="text-blue-500 flex justify-center items-center h-96">
+          <div className="text-blue-500 flex justify-center items-center h-32">
             <FaCircleNotch size={50} className="animate-spin" />
           </div>
         ) : excelData && excelData.length > 0 ? (
