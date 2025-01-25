@@ -2,7 +2,7 @@
 import PrivateRoute from "@/components/privateroutes";
 import { useAuth } from "@/context/authcontext";
 import React, { useEffect, useRef, useState } from "react";
-import { FaPrint, FaUpload } from "react-icons/fa";
+import { FaCircleNotch, FaPrint, FaUpload } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import PrintPage from "../print/page";
 import ReactDOM from "react-dom/client";
@@ -10,7 +10,6 @@ import { FaXmark } from "react-icons/fa6";
 import { FormatFileSize } from "@/utils/SizeFormat/FormatFileSize";
 import DragAndDropComponent from "@/components/DragAndDropComponent";
 import FormattedNumber from "@/utils/FormattedNumber";
-import FormattedSumTotal from "@/utils/FormattedSumTotal";
 
 export default function Page() {
   const { user } = useAuth();
@@ -24,6 +23,7 @@ export default function Page() {
     name: "",
     size: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   // const internalIdColumnIndex = 0;
   const mainLineName = 0;
@@ -181,6 +181,12 @@ export default function Page() {
 
     setIsFileUploaded(true);
     reader.readAsBinaryString(file);
+
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
   };
 
   const handleRemoveFile = () => {
@@ -222,7 +228,20 @@ export default function Page() {
                 onClick={handleUploadFile}
                 className="p-2 flex gap-2 items-center bg-blue-500/80 text-white hover:bg-blue-600/80 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-md"
               >
-                <FaUpload size={20} color="#fff" /> Upload File
+                {isLoading ? (
+                  <>
+                    <FaCircleNotch
+                      size={20}
+                      color="#fff"
+                      className="animate-spin"
+                    />{" "}
+                    Uploading
+                  </>
+                ) : (
+                  <>
+                    <FaUpload size={20} color="#fff" /> Upload File
+                  </>
+                )}
               </button>
               {excelData.length > 0 && (
                 <button
@@ -257,7 +276,9 @@ export default function Page() {
                 <button
                   ref={buttonRef}
                   onClick={toggleDropdown}
-                  className="flex items-center gap-2 font-semibold"
+                  className={`flex items-center gap-2 font-semibold ${
+                    isLoading && "opacity-0"
+                  }`}
                 >
                   <FaPrint size={20} color="#333" />
                   Print Now
@@ -282,7 +303,11 @@ export default function Page() {
             </>
           )}
         </div>
-        {excelData && excelData.length > 0 ? (
+        {isLoading ? (
+          <div className="text-blue-500 flex justify-center items-center h-96">
+            <FaCircleNotch size={50} className="animate-spin" />
+          </div>
+        ) : excelData && excelData.length > 0 ? (
           excelData.slice(1).map((row, rowIndex) => (
             <div key={rowIndex}>
               <div className="my-5 flex justify-between text-sm text-[#333] px-10">
@@ -446,6 +471,7 @@ export default function Page() {
               setExcelData={setExcelData}
               setIsFileUploaded={setIsFileUploaded}
               handleUploadFile={handleUploadFile}
+              setIsLoading={setIsLoading}
             />
           </div>
         )}

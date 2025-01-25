@@ -7,6 +7,7 @@ export default function DragAndDropComponent({
   setExcelData,
   setIsFileUploaded,
   handleUploadFile,
+  setIsLoading
 }: any) {
   const [isOnDragOver, setIsDragOver] = useState(false);
 
@@ -56,6 +57,11 @@ export default function DragAndDropComponent({
 
     setIsFileUploaded(true);
     reader.readAsBinaryString(file);
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
   };
   return (
     <div
