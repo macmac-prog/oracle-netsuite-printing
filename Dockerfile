@@ -20,4 +20,4 @@ RUN pnpm run build
 
 EXPOSE 1000
 
-CMD ["pnpm", "start"]
+CMD ["pnpm", "start", "--", "-p", "1000"]
