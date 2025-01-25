@@ -13,9 +13,10 @@ COPY package.json pnpm-lock.yaml ./
 
 RUN pnpm install
 
-
 # Copy the remaining application files to the working directory
 COPY . .
+
+RUN pnpm run build
 
 EXPOSE 1000
 
