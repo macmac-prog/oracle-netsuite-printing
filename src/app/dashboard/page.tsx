@@ -1,8 +1,15 @@
 "use client";
 import PrivateRoute from "@/components/privateroutes";
 import { useAuth } from "@/context/authcontext";
-import React, { useEffect, useRef, useState } from "react";
-import { FaCircleNotch, FaPrint, FaUpload } from "react-icons/fa";
+import React, { use, useEffect, useRef, useState } from "react";
+import {
+  FaCircleNotch,
+  FaMinus,
+  FaPlus,
+  FaPrint,
+  FaTrashAlt,
+  FaUpload,
+} from "react-icons/fa";
 import { read, utils, readFile } from "xlsx";
 import PrintPage from "../print/page";
 import ReactDOM from "react-dom/client";
@@ -10,6 +17,7 @@ import { FaXmark } from "react-icons/fa6";
 import { FormatFileSize } from "@/utils/SizeFormat/FormatFileSize";
 import DragAndDropComponent from "@/components/DragAndDropComponent";
 import FormattedNumber from "@/utils/FormattedNumber";
+import Papa from "papaparse";
 
 export default function Page() {
   const { user } = useAuth();
@@ -24,6 +32,10 @@ export default function Page() {
     size: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isHideTable, setIsHideTable] = useState<{ [key: number]: boolean }>(
+    {}
+  );
+  const [progress, setProgress] = useState(0);
 
   // const internalIdColumnIndex = 0;
   const mainLineName = 0;
@@ -121,7 +133,7 @@ export default function Page() {
     },
   ];
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e: any) => {
     setIsDropdownOpen((prev) => !prev);
   };
 
@@ -143,7 +155,25 @@ export default function Page() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  useEffect(() => {
+    let interval: any;
+    let timeout: any;
 
+    if (isLoading) {
+      interval = setInterval(() => {
+        setProgress((prevProgress) => Math.min(prevProgress + 1, 100));
+      }, 40);
+
+      timeout = setTimeout(() => {
+        setIsLoading(false);
+        clearInterval(interval);
+      }, 4000);
+    }
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [isLoading]);
   const handleFileUpload = (e: any) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -162,7 +192,7 @@ export default function Page() {
     reader.onload = (event) => {
       const data = event.target?.result as string;
 
-      const workbook = read(data, { type: "binary" });
+      const workbook = read(data, { type: "array" });
 
       const worksheetName = workbook.SheetNames[0];
 
@@ -183,13 +213,9 @@ export default function Page() {
     };
 
     setIsFileUploaded(true);
-    reader.readAsBinaryString(file);
+    reader.readAsArrayBuffer(file);
 
     setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 4000);
   };
 
   const handleRemoveFile = () => {
@@ -199,9 +225,44 @@ export default function Page() {
       fileInputRef.current.value = "";
     }
     setIsFileUploaded(false);
+    setProgress(0);
+  };
+  const handleCancelUpload = () => {
+    setExcelData([]);
+    setFileInfo({ name: "", size: "" });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+    setIsFileUploaded(false);
+    setIsLoading(false);
+    setProgress(0);
   };
 
   const handleUploadFile = () => fileInputRef.current?.click();
+
+  const handleCloseTable = (rowIndex: number) => () => {
+    setIsHideTable((isHideTable) => ({
+      ...isHideTable,
+      [rowIndex]: !isHideTable[rowIndex],
+    }));
+  };
+
+  const loadingText = [
+    "U",
+    "p",
+    "l",
+    "o",
+    "a",
+    "d",
+    "i",
+    "n",
+    "g",
+    ".",
+    ".",
+    ".",
+  ];
+
+  console.log(loadingText);
 
   return (
     <PrivateRoute>
@@ -212,11 +273,27 @@ export default function Page() {
         </h2>
       </div>
       <div className="mt-5 px-5">
-        <div className="border border-[#005483] pl-5 py-5">
+        <div className="border border-[#005483] pl-5 py-5 relative">
           <p className="mb-2 text-xl font-bold">
-            {excelData.length > 0 ? "Preview Data" : "Import Data"}
+            {isLoading ? (
+              <div className="flex">
+                {loadingText.map((letter, index: any) => (
+                  <span
+                    key={index}
+                    className="animate-bounce"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </div>
+            ) : excelData.length > 0 ? (
+              "Preview Data"
+            ) : (
+              "Import Data"
+            )}
           </p>
-          <div>
+          <div className="z-10">
             <input
               ref={fileInputRef}
               type="file"
@@ -246,17 +323,27 @@ export default function Page() {
                   </>
                 )}
               </button>
-              {excelData.length > 0 && (
-                <button
-                  type="button"
-                  onClick={handleRemoveFile}
-                  className="p-2 flex gap-2 items-center bg-red-500/80 text-white hover:bg-red-600/80 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-md"
-                >
-                  <FaXmark size={20} color="#fff" /> Remove
-                </button>
-              )}
+              {isLoading
+                ? excelData.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={handleCancelUpload}
+                      className="p-2 flex gap-2 items-center bg-yellow-500/80 text-white hover:bg-yellow-600/80 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-md"
+                    >
+                      <FaXmark size={20} color="#fff" /> Cancel Upload
+                    </button>
+                  )
+                : excelData.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={handleRemoveFile}
+                      className="p-2 flex gap-2 items-center bg-red-500/80 text-white hover:bg-red-600/80 hover:translate-x-1 hover:-translate-y-1 transition-all duration-300 ease-in-out rounded-md"
+                    >
+                      <FaTrashAlt size={20} color="#fff" /> Remove
+                    </button>
+                  )}
             </div>
-            {fileInfo.name && (
+            {fileInfo.name && !isLoading && (
               <div className="mt-2">
                 <p>
                   <strong>File Name:</strong> {fileInfo.name}
@@ -267,6 +354,15 @@ export default function Page() {
               </div>
             )}
           </div>
+
+          <div
+            className={`absolute top-0 transition-all duration-100 ease-linear left-0 h-full -z-10 ${
+              progress === 100
+                ? "bg-green-100/70"
+                : "bg-gradient-to-r from-[#005483] to-[#2eb2ff] opacity-20"
+            }`}
+            style={{ width: `${progress}%` }}
+          ></div>
         </div>
         <div
           className={`w-full flex justify-end pr-5 ${
@@ -277,6 +373,7 @@ export default function Page() {
             <>
               <div>
                 <button
+                  type="button"
                   ref={buttonRef}
                   onClick={toggleDropdown}
                   className={`flex items-center gap-2 font-semibold ${
@@ -290,7 +387,7 @@ export default function Page() {
               {isDropdownOpen && (
                 <div
                   ref={dropdownRef}
-                  className="absolute flex flex-col right-5 mt-10 bg-[#dfe4eb] border border-slate-200 shadow-xl"
+                  className="absolute flex flex-col right-5 mt-10 bg-[#dfe4eb] border border-slate-200 shadow-xl z-50"
                 >
                   {printOptions.map((option, index) => (
                     <button
@@ -311,9 +408,27 @@ export default function Page() {
             <FaCircleNotch size={50} className="animate-spin" />
           </div>
         ) : excelData && excelData.length > 0 ? (
-          excelData.slice(1).map((row, rowIndex) => (
-            <div key={rowIndex}>
-              <div className="my-5 flex justify-between text-sm text-[#333] px-10">
+          excelData.slice(1).map((row, rowIndex, array) => (
+            <div key={rowIndex} className="relative">
+              <button
+                type="button"
+                id="button-for-hide"
+                onClick={handleCloseTable(rowIndex)}
+                className="absolute -top-[48px] left-3 rounded-lg bg-[#a1c1ed] px-2 py-0.5 hover:bg-[#8caad4]"
+              >
+                {isHideTable[rowIndex] ? (
+                  <FaPlus size={13} color="#333" />
+                ) : (
+                  <FaMinus size={13} color="#333" />
+                )}
+              </button>
+              <div
+                className={`${
+                  isHideTable[rowIndex]
+                    ? "max-h-0 overflow-y-hidden"
+                    : "max-h-[1000px] overflow-y-auto"
+                } my-5 grid grid-cols-5 gap-3 text-sm text-[#333] px-10 transform transition-all duration-300 ease-in-out`}
+              >
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-col">
                     <p>Chassis Number</p>
@@ -463,8 +578,17 @@ export default function Page() {
                     </tbody>
                   </table>
                 </div>
+                <div></div>
               </div>
-              <div className="w-full flex justify-end pr-5 py-5 my-5 bg-[#dfe4eb]" />
+              <div
+                className={`w-full flex justify-end pr-5 py-5 my-5 bg-[#dfe4eb] 
+                  ${
+                    isHideTable[rowIndex] && rowIndex === array.length - 1
+                      ? "hidden"
+                      : ""
+                  }
+                  `}
+              />
             </div>
           ))
         ) : (
