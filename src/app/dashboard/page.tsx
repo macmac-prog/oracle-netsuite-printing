@@ -3,7 +3,7 @@ import PrivateRoute from "@/components/privateroutes";
 import { useAuth } from "@/context/authcontext";
 import React, { useEffect, useRef, useState } from "react";
 import { FaCircleNotch, FaPrint, FaUpload } from "react-icons/fa";
-import * as XLSX from "xlsx";
+import { read, utils, readFile } from "xlsx";
 import PrintPage from "../print/page";
 import ReactDOM from "react-dom/client";
 import { FaXmark } from "react-icons/fa6";
@@ -110,7 +110,6 @@ export default function Page() {
       };
     }
   };
-
   const printOptions = [
     {
       label: "Collection Receipt",
@@ -146,7 +145,7 @@ export default function Page() {
   }, []);
 
   const handleFileUpload = (e: any) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files[0];
     if (!file) return;
 
     const fileName = file.name;
@@ -159,15 +158,19 @@ export default function Page() {
     });
 
     const reader = new FileReader();
+
     reader.onload = (event) => {
-      const data = event.target?.result;
+      const data = event.target?.result as string;
 
-      const workbook = XLSX.read(data, { type: "binary" });
+      const workbook = read(data, { type: "binary" });
 
-      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      const worksheetName = workbook.SheetNames[0];
 
-      const jsonData: any[] = XLSX.utils.sheet_to_json(worksheet, {
+      const worksheet = workbook.Sheets[worksheetName];
+
+      const jsonData: any[] = utils.sheet_to_json(worksheet, {
         header: 1,
+        raw: false,
       });
 
       const stringData = jsonData.map((row) =>
