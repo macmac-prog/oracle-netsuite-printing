@@ -18,6 +18,7 @@ import { FormatFileSize } from "@/utils/SizeFormat/FormatFileSize";
 import DragAndDropComponent from "@/components/DragAndDropComponent";
 import FormattedNumber from "@/utils/FormattedNumber";
 import Papa from "papaparse";
+import TextLoading from "@/components/loaders/TextLoading";
 
 export default function Page() {
   const { user } = useAuth();
@@ -247,23 +248,6 @@ export default function Page() {
     }));
   };
 
-  const loadingText = [
-    "U",
-    "p",
-    "l",
-    "o",
-    "a",
-    "d",
-    "i",
-    "n",
-    "g",
-    ".",
-    ".",
-    ".",
-  ];
-
-  console.log(loadingText);
-
   return (
     <PrivateRoute>
       <div className="mt-5 pl-5">
@@ -276,17 +260,7 @@ export default function Page() {
         <div className="border border-[#005483] pl-5 py-5 relative">
           <p className="mb-2 text-xl font-bold">
             {isLoading ? (
-              <div className="flex">
-                {loadingText.map((letter, index: any) => (
-                  <span
-                    key={index}
-                    className="animate-bounce"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </div>
+              <TextLoading />
             ) : excelData.length > 0 ? (
               "Preview Data"
             ) : (
