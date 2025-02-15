@@ -13,6 +13,7 @@ import Size6Sales from "@/utils/salesinvoice/size6";
 import Size7Sales from "@/utils/salesinvoice/size7";
 import Size8Sales from "@/utils/salesinvoice/size8";
 import Size9Sales from "@/utils/salesinvoice/size9";
+import DAP1Size from "@/utils/salesinvoice/global/DAP1Size";
 
 const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
   const { user } = useAuth();
@@ -222,6 +223,22 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
           "TANZ3",
         ];
 
+        const DAP1SizeData = [
+          "ALAD",
+          "AURD",
+          "CALD",
+          "CAMD",
+          "KABD",
+          "LABD",
+          "MARD",
+          "RIZD",
+          "SANM",
+          "IMED",
+          "IPID",
+          "SIND",
+          "TUBOD"
+        ]
+
         // if (size1.some((branch) => branch === user?.branchCode)) {
         //   return <Size1Sales data={data} />;
         // } else if (size2.some((branch) => branch === user?.branchCode)) {
@@ -242,6 +259,8 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
         //   return <Size9Sales data={data} />;
         if (luzonSizeData.some((branch) => branch === user?.branchCode)) {
           return <LuzonSize data={data} />;
+        } else if (DAP1SizeData.some((branch) => branch === user?.branchCode)) {
+          return <DAP1Size data={data} />
         } else {
           return (
             <div className="text-center flex items-center justify-center h-screen font-bold text-lg">
