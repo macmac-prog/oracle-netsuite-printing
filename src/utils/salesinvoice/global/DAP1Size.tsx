@@ -176,7 +176,7 @@ const DAP1Size: React.FC<PrintPageProps> = ({ data }) => {
       <div className="mx-[37.795275591px]">
         <div className="mt-[18px] ml-[392.31496063px]">
           <p className="text-[10px] text-center">
-            {data[1]?.[cashier] || "Sample Cashier"}
+            {data[1]?.[cashier] || ""}
           </p>
         </div>
       </div>
