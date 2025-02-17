@@ -258,7 +258,7 @@ export default function Page() {
       </div>
       <div className="mt-5 px-5">
         <div className="border border-[#005483] pl-5 py-5 relative">
-          <p className="mb-2 text-xl font-bold">
+          <div className="mb-2 text-xl font-bold">
             {isLoading ? (
               <TextLoading />
             ) : excelData.length > 0 ? (
@@ -266,7 +266,7 @@ export default function Page() {
             ) : (
               "Import Data"
             )}
-          </p>
+          </div>
           <div className="z-10">
             <input
               ref={fileInputRef}
