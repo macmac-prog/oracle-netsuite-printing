@@ -51,7 +51,7 @@ const DSMSISize: React.FC<PrintPageProps> = ({ data }) => {
         </p>
       </div>
       <div className="flex h-[37.795275591px]">
-        <p className="w-[328.81889764px] pl-[132.28346457px]">
+        <p className="w-[472.44094488px] pl-[132.28346457px]">
           {data[1]?.[billingAddress] || ""}
         </p>
         <p className="w-[132.28346457px] pl-[151.18110236px]">
@@ -60,7 +60,7 @@ const DSMSISize: React.FC<PrintPageProps> = ({ data }) => {
       </div>
       <div className="flex h-[18.897637795px]">
         <p className="w-[328.81889764px] pl-[132.28346457px]">
-          {data[1]?.[businessStyle] || "Calape"}
+          {data[1]?.[businessStyle] || ""}
         </p>
         <p className="w-[132.28346457px] pl-[151.18110236px]">
           {data[1]?.[cardHolderSignatures] || ""}
