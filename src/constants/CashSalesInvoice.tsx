@@ -3,6 +3,7 @@ import { PrintPageProps } from "@/types/types";
 import DAP1Size from "@/utils/salesinvoice/global/DAP1Size";
 import DSMSISize from "@/utils/salesinvoice/global/DSMSISize";
 import DapCsiSize from "@/utils/salesinvoice/global/DapCsiSize";
+import DsmCsiSize from "@/utils/salesinvoice/global/DsmCsiSize";
 import HondaDesSize from "@/utils/salesinvoice/global/HondaDesSize";
 import LuzonSize from "@/utils/salesinvoice/LuzonSize";
 import Size1Sales from "@/utils/salesinvoice/size1";
@@ -238,7 +239,7 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
     "TUBOD",
   ];
 
-  const DapCsiSizeData = [
+  const dapCsiSizeData = [
     "BUUD",
     "DIPD",
     "ILID",
@@ -258,6 +259,18 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
     "TACU",
     "TOMAS"
   ]
+  const dsmCsiSizeData = [
+    "BALA",
+    "CALIN",
+    "CERI",
+    "DSMAO",
+    "DSMM",
+    "DSMT2",
+    "ILOI",
+    "JIMEDSM",
+    "LABA",
+    "MAND2",
+  ];
 
   // if (size1.some((branch) => branch === user?.branchCode)) {
   //   return <Size1Sales data={data} />;
@@ -281,10 +294,12 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
     return <LuzonSize data={data} />;
   } else if (DAP1SizeData.some((branch) => branch === user?.branchCode)) {
     return <DAP1Size data={data} />;
-  } else if (DapCsiSizeData.some((branch) => branch === user?.branchCode)) {
+  } else if (dapCsiSizeData.some((branch) => branch === user?.branchCode)) {
     return <DapCsiSize data={data} />;
   } else if (DSMSISizeData.some((branch) => branch === user?.branchCode)) {
     return <DSMSISize data={data} />;
+  } else if (dsmCsiSizeData.some((branch) => branch === user?.branchCode)) {
+    return <DsmCsiSize data={data} />;
   } else {
     return (
       <div className="text-center flex items-center justify-center h-screen font-bold text-lg">
