@@ -176,6 +176,7 @@ export default function Page() {
     };
   }, [isLoading]);
   const handleFileUpload = (e: any) => {
+    setProgress(0);
     const file = e.target.files[0];
     if (!file) return;
 
