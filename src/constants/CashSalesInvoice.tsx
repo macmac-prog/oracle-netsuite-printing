@@ -1,6 +1,7 @@
 import { useAuth } from "@/context/authcontext";
 import { PrintPageProps } from "@/types/types";
 import DAP1Size from "@/utils/salesinvoice/global/DAP1Size";
+import DSMSISize from "@/utils/salesinvoice/global/DSMSISize";
 import DapCsiSize from "@/utils/salesinvoice/global/DapCsiSize";
 import HondaDesSize from "@/utils/salesinvoice/global/HondaDesSize";
 import LuzonSize from "@/utils/salesinvoice/LuzonSize";
@@ -252,6 +253,12 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
     "BONI",
   ];
 
+  const DSMSISizeData = [
+    "DIGOS",
+    "TACU",
+    "TOMAS"
+  ]
+
   // if (size1.some((branch) => branch === user?.branchCode)) {
   //   return <Size1Sales data={data} />;
   // } else if (size2.some((branch) => branch === user?.branchCode)) {
@@ -276,6 +283,8 @@ const CashSalesInvoice: React.FC<PrintPageProps> = ({ data }) => {
     return <DAP1Size data={data} />;
   } else if (DapCsiSizeData.some((branch) => branch === user?.branchCode)) {
     return <DapCsiSize data={data} />;
+  } else if (DSMSISizeData.some((branch) => branch === user?.branchCode)) {
+    return <DSMSISize data={data} />;
   } else {
     return (
       <div className="text-center flex items-center justify-center h-screen font-bold text-lg">
