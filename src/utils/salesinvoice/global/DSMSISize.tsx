@@ -33,8 +33,8 @@ const DSMSISize: React.FC<PrintPageProps> = ({ data }) => {
   const unitPrice = 26;
 
   return (
-    <div className="text-xs h-[506.45669291px] w-[767.24409449px]">
-      <div className="flex h-[17.007874016px] mt-[105.448818896px]">
+    <div className="text-xs h-[506.45669291px] w-[767.24409449px] border">
+      <div className="flex h-[17.007874016px] mt-[90.33070866px]">
         <p className="w-[528.66141732px] pl-[147.4015748px]">
           {data[1]?.[mainLineName] || ""}
         </p>
@@ -66,7 +66,7 @@ const DSMSISize: React.FC<PrintPageProps> = ({ data }) => {
           {data[1]?.[cardHolderSignatures] || ""}
         </p>
       </div>
-      <div className="mx-[37.795275591px] mt-[26.456692913px] h-[64.251968504px]">
+      <div className="mx-[37.795275591px] mt-[26.456692913px] h-[91.086614173px] border">
         <table className="border-collapse w-full">
           <tbody>
             {data.slice(1, 4).map((row, index) => (
@@ -93,7 +93,7 @@ const DSMSISize: React.FC<PrintPageProps> = ({ data }) => {
           </tbody>
         </table>
       </div>
-      <div className="mx-[37.795275591px] h-[41.952755906px]">
+      <div className="mx-[37.795275591px] h-[37.795275591px] border">
         <table className="border-collapse w-full">
           <tbody>
             <tr className="text-[10px] text-center">
@@ -117,7 +117,7 @@ const DSMSISize: React.FC<PrintPageProps> = ({ data }) => {
           </tbody>
         </table>
       </div>
-      <div className="mx-[37.795275591px] h-[97px]">
+      <div className="mx-[37.795275591px] h-[89.196850394px] border">
         <table className="border-collapse w-full">
           <tbody>
             <tr className="text-[10px]">
