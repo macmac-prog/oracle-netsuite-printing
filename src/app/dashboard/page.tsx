@@ -163,12 +163,12 @@ export default function Page() {
     if (isLoading) {
       interval = setInterval(() => {
         setProgress((prevProgress) => Math.min(prevProgress + 1, 100));
-      }, 40);
+      }, 25);
 
       timeout = setTimeout(() => {
         setIsLoading(false);
         clearInterval(interval);
-      }, 4000);
+      }, 2500);
     }
     return () => {
       clearInterval(interval);
@@ -176,6 +176,7 @@ export default function Page() {
     };
   }, [isLoading]);
   const handleFileUpload = (e: any) => {
+    setProgress(0);
     const file = e.target.files[0];
     if (!file) return;
 
