@@ -93,7 +93,7 @@ const DSMSISize: React.FC<PrintPageProps> = ({ data }) => {
           </tbody>
         </table>
       </div>
-      <div className="mx-[32.125984252px] h-[37.795275591px]">
+      <div className="mx-[37.795275591px] h-[37.795275591px]">
         <table className="border-collapse w-full">
           <tbody>
             <tr className="text-[10px] text-center">
@@ -117,7 +117,7 @@ const DSMSISize: React.FC<PrintPageProps> = ({ data }) => {
           </tbody>
         </table>
       </div>
-      <div className="mx-[32.125984252px] h-[90.708661417px]">
+      <div className="mx-[37.795275591px] h-[89.196850394px]">
         <table className="border-collapse w-full">
           <tbody>
             <tr className="text-[10px]">
